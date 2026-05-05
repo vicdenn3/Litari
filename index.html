@@ -3,9 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Мастер и Маргарита — Digital Humanities</title>
+    <title>PagePath — DH project</title>
+    
+    <!-- ПОДКЛЮЧЕНИЕ ШРИФТОВ -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@400;700&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+
     <style>
-        /* CSS СТИЛИ ТЕПЕРЬ ВНУТРИ ТЕГА STYLE */
         * {
             margin: 0;
             padding: 0;
@@ -13,7 +18,7 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Lora', serif;
             background-color: #fffad7 !important; /* КРЕМОВЫЙ ФОН */
             color: #1a1a1a;
             scroll-behavior: smooth;
@@ -33,7 +38,6 @@
             left: 0;
             width: 100%;
             height: 100%;
-            /* ВНИМАНИЕ: Проверь расширение .jpg или .jpeg у своего файла */
             background: url('illustration.jpeg') no-repeat center top; 
             background-size: cover;
         }
@@ -51,18 +55,25 @@
             box-shadow: 0 2px 5px rgba(0,0,0,0.05);
         }
 
-        .logo { font-size: 1.2rem; font-weight: 500; }
+        .logo { 
+            /* Логотип теперь шрифтом Lora */
+            font-family: 'Lora', serif;
+            font-size: 1.5rem; 
+            font-weight: 700; 
+        }
 
         .nav-links { list-style: none; display: flex; gap: 40px; }
 
         .nav-links a {
+            font-family: 'Montserrat', sans-serif;
             text-decoration: none;
             color: #1a1a1a;
-            font-size: 1rem;
+            font-size: 0.9rem;
+            font-weight: 400;
             text-transform: lowercase;
+            letter-spacing: 0.5px;
         }
 
-        /* СЕТКА ДЛЯ ИНТРО */
         .content-section {
             min-height: 100vh;
             padding: 100px 60px;
@@ -80,22 +91,49 @@
         }
 
         .intro-left h3 {
+            font-family: 'Playfair Display', serif;
             font-size: 1.5rem;
             text-transform: uppercase;
             margin-bottom: 30px;
+            letter-spacing: 2px;
         }
 
-        .quote { font-style: normal; line-height: 1.6; }
-        .quote cite { display: block; margin-top: 10px; font-size: 0.9rem; opacity: 0.7; }
-
-        .intro-right h2 { font-size: 2.2rem; margin-bottom: 40px; }
-
-        .main-text p { font-size: 1.05rem; line-height: 1.8; margin-bottom: 25px; }
+        .quote { 
+            font-family: 'Playfair Display', serif;
+            font-style: italic; 
+            font-size: 1.2rem;
+            line-height: 1.6; 
+        }
         
-        /* Жирный верхний текст как на макете */
-        .main-text p:first-child {
+        .quote cite { 
+            font-family: 'Montserrat', sans-serif;
+            display: block; 
+            margin-top: 10px; 
+            font-size: 0.8rem; 
+            font-style: normal;
             font-weight: 700;
+            opacity: 0.7; 
             text-transform: uppercase;
+        }
+
+        .intro-right h2 { 
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem; 
+            margin-bottom: 40px; 
+        }
+
+        .main-text p { 
+            font-family: 'Lora', serif;
+            font-size: 1.1rem; 
+            line-height: 1.8; 
+            margin-bottom: 25px; 
+        }
+        
+        .main-text p:first-child {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
         }
     </style>
 </head>
@@ -134,7 +172,7 @@
             <div class="intro-right">
                 <h2>Добро пожаловать!</h2>
                 <div class="main-text">
-                    <p>ЭТО РОМАН О ЛЮБВИ, СВОБОДЕ, СИЛЕ ИСКУССТВА И ПРИРОДЕ ЗЛА, ГДЕ МОСКОВСКАЯ РЕАЛЬНОСТЬ 1930-х ГОДОВ ПЕРЕПЛЕТАЕТСЯ С БИБЛЕЙСКИМИ СОБЫТИЯМИ, А САТИРА СОСЕДСТВУЕТ С ГЛУБОКИМИ ФИЛОСОФСКИМИ ВОПРОСАМИ.</p>
+                    <p>Это роман о любви, свободе, силе искусства и природе зла, где московская реальность 1930-х годов переплетается с библейскими событиями, а сатира соседствует с глубокими философскими вопросами.</p>
                     <p>На этой платформе вы найдёте карту всех миров, представленных в книге — от Патриарших прудов до Бала у Сатаны, граф со связями всех персонажей, который поможет разобраться в хитросплетениях их судеб, уникальные иллюстрации, запечатлевшие любимых героев, а также форум, где люди делятся своим мнением, спорят о рукописях, которые не горят, и находят единомышленников.</p>
                 </div>
             </div>
@@ -142,7 +180,6 @@
     </section>
 
     <script>
-        // JS ТЕПЕРЬ ВНУТРИ ТЕГА SCRIPT
         document.querySelector('a[href="#intro"]').addEventListener('click', function(e) {
             e.preventDefault();
             const target = document.querySelector('#intro');
