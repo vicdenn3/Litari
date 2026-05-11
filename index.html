@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PagePath — DH project</title>
     
-    <!-- ПОДКЛЮЧЕНИЕ ШРИФТОВ -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@400;700&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
 
     <style>
+        /* --- ОРИГИНАЛЬНЫЕ СТИЛИ --- */
         * {
             margin: 0;
             padding: 0;
@@ -19,9 +19,10 @@
 
         body {
             font-family: 'Lora', serif;
-            background-color: #fffad7 !important; /* КРЕМОВЫЙ ФОН */
+            background-color: #fffad7 !important;
             color: #1a1a1a;
             scroll-behavior: smooth;
+            overflow-x: hidden; /* Чтобы огромные буквы не создавали горизонтальный скролл */
         }
 
         .hero {
@@ -56,7 +57,6 @@
         }
 
         .logo { 
-            /* Логотип теперь шрифтом Lora */
             font-family: 'Lora', serif;
             font-size: 1.5rem; 
             font-weight: 700; 
@@ -135,6 +135,59 @@
             font-size: 0.95rem;
             letter-spacing: 0.5px;
         }
+
+        /* --- ИСПРАВЛЕННЫЙ ФУТЕР (КАК НА МАКЕТЕ) --- */
+        .site-footer {
+            background-color: #fffad7;
+            color: #1a1a1a;
+            padding: 100px 60px 0 60px;
+            font-family: 'Montserrat', sans-serif;
+            text-transform: uppercase;
+            border-top: 1px solid rgba(0,0,0,0.05);
+            
+            position: relative; /* Чтобы буквы позиционировались внутри */
+            overflow: hidden;   /* ОБРЕЗАЕМ БУКВЫ ПО КРАЯМ */
+            min-height: 430px;  /* Высота всего подвала */
+            display: flex;
+            flex-direction: column;
+        }
+
+        .footer-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            position: relative;
+            z-index: 10; /* Текст инфо-колонок всегда ПОВЕРХ больших букв */
+            font-size: 0.75rem;
+            line-height: 1.6;
+            letter-spacing: 1px;
+        }
+
+        .footer-column { flex: 1; }
+        .footer-column:nth-child(2) { text-align: center; }
+        .footer-column:nth-child(3) { text-align: right; }
+
+        .footer-big-title {
+            position: absolute;
+            bottom: -2vw; /* ЧАСТЬ ТЕКСТА ЗА НИЖНИМ КРАЕМ */
+            left: -6vw; /* ВЫХОД ЗА ЛЕВЫЙ КРАЙ */
+            margin: 0;
+            
+            font-family: 'Montserrat', sans-serif;
+            font-size: 21vw; /* Гигантский размер */
+            font-weight: 700;
+            line-height: 0.8;
+            letter-spacing: -1.2vw; /* Плотные буквы */
+            white-space: nowrap;
+            pointer-events: none; /* Чтобы буквы не мешали выделять текст выше */
+        }
+
+        @media (max-width: 768px) {
+            .footer-top { flex-direction: column; gap: 30px; text-align: left !important; }
+            .footer-column { text-align: left !important; }
+            .footer-big-title { font-size: 45vw; bottom: -5vw; }
+            .site-footer { min-height: 450px; padding: 60px 20px 0 20px; }
+        }
     </style>
 </head>
 <body>
@@ -178,6 +231,26 @@
             </div>
         </div>
     </section>
+
+    <footer class="site-footer">
+        <div class="footer-top">
+            <div class="footer-column">
+                <p>ПРОЕКТ СОЗДАН ЧИТАТЕЛЯМИ<br>ДЛЯ ЧИТАТЕЛЕЙ</p>
+            </div>
+            <div class="footer-column">
+                <p>СВЯЗАТЬСЯ С НАМИ<br>PAGEPATH@MAIL.RU</p>
+            </div>
+            <div class="footer-column">
+                <p>НАД ПРОЕКТОМ РАБОТАЛИ (тг)<br>
+                [DARR_YAAS]<br>
+                [VICDENN]<br>
+                [ARUISSHA]<br>
+                [IRINMRMR]</p>
+            </div>
+        </div>
+        
+        <h1 class="footer-big-title">PagePath</h1>
+    </footer>
 
     <script>
         document.querySelector('a[href="#intro"]').addEventListener('click', function(e) {
