@@ -188,6 +188,60 @@
             .footer-big-title { font-size: 45vw; bottom: -5vw; }
             .site-footer { min-height: 450px; padding: 60px 20px 0 20px; }
         }
+
+        /* --- СТИЛИ ДЛЯ КУКИ --- */
+        .cookie-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(26, 26, 26, 0.9);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            backdrop-filter: blur(5px);
+        }
+
+        .cookie-card {
+            background: #fffad7;
+            padding: 40px;
+            border: 4px solid #1a1a1a;
+            max-width: 500px;
+            text-align: center;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .cookie-card h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .cookie-card p {
+            margin-bottom: 30px;
+            line-height: 1.5;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+
+        .cookie-btn {
+            background: #1a1a1a;
+            color: #fffad7;
+            border: none;
+            padding: 15px 40px;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: 'Montserrat', sans-serif;
+            transition: 0.3s;
+        }
+
+        .cookie-btn:hover {
+            transform: scale(1.05);
+            background: #333;
+        }
     </style>
 </head>
 <body>
@@ -252,7 +306,28 @@
         <h1 class="footer-big-title">PagePath</h1>
     </footer>
 
+    <div id="cookie-overlay" class="cookie-overlay">
+        <div class="cookie-card">
+            <h2>МЫ ИСПОЛЬЗУЕМ КУКИ</h2>
+            <p>Для корректной работы PagePath и вашего удобства нам нужно ваше разрешение на использование файлов cookie.</p>
+            <button onclick="acceptCookies()" class="cookie-btn">РАЗРЕШИТЬ</button>
+        </div>
+    </div>
+
     <script>
+        // Проверка куки при загрузке
+        window.onload = function() {
+            if (!localStorage.getItem('cookiesAccepted')) {
+                document.getElementById('cookie-overlay').style.display = 'flex';
+            }
+        };
+
+        // Функция при нажатии на кнопку
+        function acceptCookies() {
+            localStorage.setItem('cookiesAccepted', 'true');
+            document.getElementById('cookie-overlay').style.display = 'none';
+        }
+
         document.querySelector('a[href="#intro"]').addEventListener('click', function(e) {
             e.preventDefault();
             const target = document.querySelector('#intro');
