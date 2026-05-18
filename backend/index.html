@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@400;700&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
 
     <style>
-        /* --- ОРИГИНАЛЬНЫЕ СТИЛИ --- */
+        /* --- ОРИГИНАЛЬНЫЕ СТИЛИ (ПОЛНОСТЬЮ СОХРАНЕНЫ) --- */
         * {
             margin: 0;
             padding: 0;
@@ -22,7 +22,7 @@
             background-color: #fffad7 !important;
             color: #1a1a1a;
             scroll-behavior: smooth;
-            overflow-x: hidden; /* Чтобы огромные буквы не создавали горизонтальный скролл */
+            overflow-x: hidden;
         }
 
         .hero {
@@ -136,7 +136,6 @@
             letter-spacing: 0.5px;
         }
 
-        /* --- ИСПРАВЛЕННЫЙ ФУТЕР (КАК НА МАКЕТЕ) --- */
         .site-footer {
             background-color: #fffad7;
             color: #1a1a1a;
@@ -145,9 +144,9 @@
             text-transform: uppercase;
             border-top: 1px solid rgba(0,0,0,0.05);
             
-            position: relative; /* Чтобы буквы позиционировались внутри */
-            overflow: hidden;   /* ОБРЕЗАЕМ БУКВЫ ПО КРАЯМ */
-            min-height: 430px;  /* Высота всего подвала */
+            position: relative; 
+            overflow: hidden;   
+            min-height: 430px;  
             display: flex;
             flex-direction: column;
         }
@@ -157,7 +156,7 @@
             justify-content: space-between;
             align-items: flex-start;
             position: relative;
-            z-index: 10; /* Текст инфо-колонок всегда ПОВЕРХ больших букв */
+            z-index: 10; 
             font-size: 0.75rem;
             line-height: 1.6;
             letter-spacing: 1px;
@@ -169,17 +168,17 @@
 
         .footer-big-title {
             position: absolute;
-            bottom: -2vw; /* ЧАСТЬ ТЕКСТА ЗА НИЖНИМ КРАЕМ */
-            left: -6vw; /* ВЫХОД ЗА ЛЕВЫЙ КРАЙ */
+            bottom: -2vw; 
+            left: -6vw; 
             margin: 0;
             
             font-family: 'Montserrat', sans-serif;
-            font-size: 21vw; /* Гигантский размер */
+            font-size: 21vw; 
             font-weight: 700;
             line-height: 0.8;
-            letter-spacing: -1.2vw; /* Плотные буквы */
+            letter-spacing: -1.2vw; 
             white-space: nowrap;
-            pointer-events: none; /* Чтобы буквы не мешали выделять текст выше */
+            pointer-events: none; 
         }
 
         @media (max-width: 768px) {
@@ -189,7 +188,6 @@
             .site-footer { min-height: 450px; padding: 60px 20px 0 20px; }
         }
 
-        /* --- СТИЛИ ДЛЯ КУКИ --- */
         .cookie-overlay {
             position: fixed;
             top: 0;
@@ -242,11 +240,68 @@
             transform: scale(1.05);
             background: #333;
         }
+
+        /* --- НОВЫЕ ДОПОЛНИТЕЛЬНЫЕ СТИЛИ ДЛЯ ВСТРОЕННЫХ СТРАНИЦ --- */
+        
+        /* Контейнер для картинок-заглушек (скрываем нарисованное меню на скриншотах) */
+        .placeholder-container {
+            width: 100%;
+            overflow: hidden;
+            background-color: #fffad7;
+        }
+        
+        .placeholder-image {
+            width: 100%;
+            display: block;
+            height: auto;
+            /* Смещаем картинку вверх, чтобы спрятать нарисованное меню под реальное */
+            margin-top: -66px; 
+        }
+
+        /* Специфические стили для полноценной страницы карты */
+        .map-section {
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 60px 60px 40px 60px;
+            background-color: #fffad7;
+        }
+
+        .map-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            margin-bottom: 40px;
+            font-weight: 700;
+        }
+
+        .map-frame {
+            border: 1px solid rgba(0,0,0,0.1);
+            background-color: transparent;
+            margin-bottom: 25px;
+            width: 100%;
+        }
+
+        .map-image {
+            width: 100%;
+            display: block;
+            height: auto;
+        }
+
+        .map-footer {
+            display: flex;
+            gap: 60px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.6;
+            padding-bottom: 40px;
+        }
     </style>
 </head>
 <body>
 
-    <section class="hero">
+    <section class="hero" id="hero-block">
         <div class="hero-image-container"></div>
     </section>
         
@@ -256,14 +311,14 @@
         </div>
         <ul class="nav-links">
             <li><a href="#intro">интро</a></li>
-            <li><a href="map.html">карта</a></li>
-            <li><a href="characters.html">персонажи</a></li>
-            <li><a href="illustrations.html">иллюстрации</a></li>
-            <li><a href="forum.html">форум</a></li>
+            <li><a href="#map">карта</a></li>
+            <li><a href="#characters">персонажи</a></li>
+            <li><a href="#illustrations">иллюстрации</a></li>
+            <li><a href="#forum">форум</a></li>
         </ul>
     </nav>
 
-    <section id="intro" class="content-section">
+    <section id="intro" class="content-section tab-content">
         <div class="intro-grid-container">
             <div class="intro-left">
                 <h3>ИНТРО</h3>
@@ -283,6 +338,38 @@
                     <p>На этой платформе вы найдёте карту всех миров, представленных в книге — от Патриарших прудов до Бала у Сатаны, граф со связями всех персонажей, который поможет разобраться в хитросплетениях их судеб, уникальные иллюстрации, запечатлевшие любимых героев, а также форум, где люди делятся своим мнением, спорят о рукописях, которые не горят, и находят единомышленников.</p>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <section id="map" class="tab-content" style="display: none;">
+        <div class="map-section">
+            <h2 class="map-title">Карта миров</h2>
+            <div class="map-frame">
+                <img src="33.png" alt="Карта миров Мастера и Маргариты" class="map-image">
+            </div>
+            <div class="map-footer">
+                <span>Карта нарисована вручную</span>
+                <span>Иллюстратор IRINMRMR</span>
+                <span>Версия 1.0</span>
+            </div>
+        </div>
+    </section>
+
+    <section id="characters" class="tab-content" style="display: none;">
+        <div class="placeholder-container">
+            <img src="00.jpg" alt="Граф персонажей" class="placeholder-image">
+        </div>
+    </section>
+
+    <section id="illustrations" class="tab-content" style="display: none;">
+        <div class="placeholder-container">
+            <img src="11.jpg" alt="Иллюстрации" class="placeholder-image">
+        </div>
+    </section>
+
+    <section id="forum" class="tab-content" style="display: none;">
+        <div class="placeholder-container">
+            <img src="22.png" alt="Форум" class="placeholder-image">
         </div>
     </section>
 
@@ -322,24 +409,61 @@
             }
         };
 
-        // Функция при нажатии на кнопку
+        // Функция подтверждения куки
         function acceptCookies() {
             localStorage.setItem('cookiesAccepted', 'true');
             document.getElementById('cookie-overlay').style.display = 'none';
         }
 
-        document.querySelector('a[href="#intro"]').addEventListener('click', function(e) {
-            e.preventDefault();
-            const target = document.querySelector('#intro');
-            const offset = 60;
-            const bodyRect = document.body.getBoundingClientRect().top;
-            const elementRect = target.getBoundingClientRect().top;
-            const elementPosition = elementRect - bodyRect;
-            const offsetPosition = elementPosition - offset;
+        // Логика SPA переключения вкладок
+        const navLinks = document.querySelectorAll('.nav-links a');
+        const tabs = document.querySelectorAll('.tab-content');
+        const heroBlock = document.getElementById('hero-block');
 
-            window.scrollTo({
-                top: offsetPosition,
-                behavior: 'smooth'
+        navLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                const targetId = this.getAttribute('href');
+                
+                // Работаем только со ссылками-хэшами внутри этой страницы
+                if (targetId.startsWith('#')) {
+                    e.preventDefault();
+
+                    // 1. Показываем большой Hero-баннер только на вкладке Интро
+                    if (targetId === '#intro') {
+                        heroBlock.style.display = 'block';
+                    } else {
+                        heroBlock.style.display = 'none';
+                    }
+
+                    // 2. Скрываем абсолютно все вкладки контента
+                    tabs.forEach(tab => {
+                        tab.style.display = 'none';
+                    });
+
+                    // 3. Активируем нужную вкладку
+                    const activeTab = document.querySelector(targetId);
+                    if (activeTab) {
+                        if (targetId === '#intro') {
+                            activeTab.style.display = 'flex'; // Твое оригинальное свойство для интро-сетки
+                            
+                            // Плавный скролл к интро с учетом высоты шапки (как в твоем коде)
+                            const offset = 60;
+                            const bodyRect = document.body.getBoundingClientRect().top;
+                            const elementRect = activeTab.getBoundingClientRect().top;
+                            const elementPosition = elementRect - bodyRect;
+                            const offsetPosition = elementPosition - offset;
+
+                            window.scrollTo({
+                                top: offsetPosition,
+                                behavior: 'smooth'
+                            });
+                        } else {
+                            activeTab.style.display = 'block'; // Обычный блочный вывод для заглушек и карт
+                            // Перемещаем скролл на самый верх страницы, чтобы просмотр начинался сначала
+                            window.scrollTo({ top: 0, behavior: 'smooth' });
+                        }
+                    }
+                }
             });
         });
     </script>
