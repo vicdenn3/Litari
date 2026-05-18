@@ -10,7 +10,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@400;700&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
 
     <style>
-        /* --- ОРИГИНАЛЬНЫЕ СТИЛИ (ПОЛНОСТЬЮ СОХРАНЕНЫ) --- */
         * {
             margin: 0;
             padding: 0;
@@ -241,9 +240,7 @@
             background: #333;
         }
 
-        /* --- НОВЫЕ ДОПОЛНИТЕЛЬНЫЕ СТИЛИ ДЛЯ ВСТРОЕННЫХ СТРАНИЦ --- */
-        
-        /* Контейнер для картинок-заглушек (скрываем нарисованное меню на скриншотах) */
+
         .placeholder-container {
             width: 100%;
             overflow: hidden;
@@ -254,11 +251,10 @@
             width: 100%;
             display: block;
             height: auto;
-            /* Смещаем картинку вверх, чтобы спрятать нарисованное меню под реальное */
             margin-top: -66px; 
         }
 
-        /* Специфические стили для полноценной страницы карты */
+
         .map-section {
             max-width: 1200px;
             width: 100%;
@@ -402,20 +398,20 @@
     </div>
 
     <script>
-        // Проверка куки при загрузке
+      
         window.onload = function() {
             if (!localStorage.getItem('cookiesAccepted')) {
                 document.getElementById('cookie-overlay').style.display = 'flex';
             }
         };
 
-        // Функция подтверждения куки
+     
         function acceptCookies() {
             localStorage.setItem('cookiesAccepted', 'true');
             document.getElementById('cookie-overlay').style.display = 'none';
         }
 
-        // Логика SPA переключения вкладок
+       
         const navLinks = document.querySelectorAll('.nav-links a');
         const tabs = document.querySelectorAll('.tab-content');
         const heroBlock = document.getElementById('hero-block');
@@ -424,29 +420,28 @@
             link.addEventListener('click', function(e) {
                 const targetId = this.getAttribute('href');
                 
-                // Работаем только со ссылками-хэшами внутри этой страницы
+                
                 if (targetId.startsWith('#')) {
                     e.preventDefault();
 
-                    // 1. Показываем большой Hero-баннер только на вкладке Интро
+                  
                     if (targetId === '#intro') {
                         heroBlock.style.display = 'block';
                     } else {
                         heroBlock.style.display = 'none';
                     }
 
-                    // 2. Скрываем абсолютно все вкладки контента
+                  
                     tabs.forEach(tab => {
                         tab.style.display = 'none';
                     });
 
-                    // 3. Активируем нужную вкладку
                     const activeTab = document.querySelector(targetId);
                     if (activeTab) {
                         if (targetId === '#intro') {
-                            activeTab.style.display = 'flex'; // Твое оригинальное свойство для интро-сетки
+                            activeTab.style.display = 'flex'; 
                             
-                            // Плавный скролл к интро с учетом высоты шапки (как в твоем коде)
+                       
                             const offset = 60;
                             const bodyRect = document.body.getBoundingClientRect().top;
                             const elementRect = activeTab.getBoundingClientRect().top;
@@ -458,8 +453,8 @@
                                 behavior: 'smooth'
                             });
                         } else {
-                            activeTab.style.display = 'block'; // Обычный блочный вывод для заглушек и карт
-                            // Перемещаем скролл на самый верх страницы, чтобы просмотр начинался сначала
+                            activeTab.style.display = 'block'; 
+                          
                             window.scrollTo({ top: 0, behavior: 'smooth' });
                         }
                     }
