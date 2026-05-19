@@ -1,0 +1,1 @@
+<u>[Ссылка на проект в Figma](https://www.figma.com/design/Kx4UfydG7dB4pPq4BL59MA/ghjtrn?node-id=0-1&t=gNZCs4enNzRM8EuC-1)
