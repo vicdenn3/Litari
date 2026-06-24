@@ -36,7 +36,7 @@
 
 ```
 
-pagepath/
+litary/
 
 ├── frontend/        # Клиентская часть
 
