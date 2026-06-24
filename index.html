@@ -1,883 +1,626 @@
-<!-- <!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PagePath — DH project</title>
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@400;700&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
-
-    <style>
-        /* --- ОРИГИНАЛЬНЫЕ СТИЛИ (ПОЛНОСТЬЮ СОХРАНЕНЫ) --- */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Lora', serif;
-            background-color: #fffad7 !important;
-            color: #1a1a1a;
-            scroll-behavior: smooth;
-            overflow-x: hidden;
-        }
-
-        .hero {
-            height: calc(100vh - 60px);
-            width: 100%;
-            position: relative;
-            overflow: hidden;
-            background-color: #fffad7;
-        }
-
-        .hero-image-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('illustration.jpeg') no-repeat center top; 
-            background-size: cover;
-        }
-
-        .bottom-nav {
-            position: sticky;
-            top: 0;
-            height: 60px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 60px;
-            background-color: #fffad7;
-            z-index: 1000;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-        }
-
-        .logo { 
-            font-family: 'Lora', serif;
-            font-size: 1.5rem; 
-            font-weight: 700; 
-        }
-
-        .nav-links { list-style: none; display: flex; gap: 40px; }
-
-        .nav-links a {
-            font-family: 'Montserrat', sans-serif;
-            text-decoration: none;
-            color: #1a1a1a;
-            font-size: 0.9rem;
-            font-weight: 400;
-            text-transform: lowercase;
-            letter-spacing: 0.5px;
-        }
-
-        .content-section {
-            min-height: 100vh;
-            padding: 100px 60px;
-            display: flex;
-            justify-content: center;
-            background-color: #fffad7;
-        }
-
-        .intro-grid-container {
-            max-width: 1200px;
-            width: 100%;
-            display: grid;
-            grid-template-columns: 3fr 7fr;
-            gap: 60px;
-        }
-
-        .intro-left h3 {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
-            text-transform: uppercase;
-            margin-bottom: 30px;
-            letter-spacing: 2px;
-        }
-
-        .quote { 
-            font-family: 'Playfair Display', serif;
-            font-style: italic; 
-            font-size: 1.2rem;
-            line-height: 1.6; 
-        }
-        
-        .quote cite { 
-            font-family: 'Montserrat', sans-serif;
-            display: block; 
-            margin-top: 10px; 
-            font-size: 0.8rem; 
-            font-style: normal;
-            font-weight: 700;
-            opacity: 0.7; 
-            text-transform: uppercase;
-        }
-
-        .intro-right h2 { 
-            font-family: 'Playfair Display', serif;
-            font-size: 2.8rem; 
-            margin-bottom: 40px; 
-        }
-
-        .main-text p { 
-            font-family: 'Lora', serif;
-            font-size: 1.1rem; 
-            line-height: 1.8; 
-            margin-bottom: 25px; 
-        }
-        
-        .main-text p:first-child {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 700;
-            font-size: 0.95rem;
-            letter-spacing: 0.5px;
-        }
-
-        .site-footer {
-            background-color: #fffad7;
-            color: #1a1a1a;
-            padding: 100px 60px 0 60px;
-            font-family: 'Montserrat', sans-serif;
-            text-transform: uppercase;
-            border-top: 1px solid rgba(0,0,0,0.05);
-            
-            position: relative; 
-            overflow: hidden;   
-            min-height: 430px;  
-            display: flex;
-            flex-direction: column;
-        }
-
-        .footer-top {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            position: relative;
-            z-index: 10; 
-            font-size: 0.75rem;
-            line-height: 1.6;
-            letter-spacing: 1px;
-        }
-
-        .footer-column { flex: 1; }
-        .footer-column:nth-child(2) { text-align: center; }
-        .footer-column:nth-child(3) { text-align: right; }
-
-        .footer-big-title {
-            position: absolute;
-            bottom: -2vw; 
-            left: -6vw; 
-            margin: 0;
-            
-            font-family: 'Montserrat', sans-serif;
-            font-size: 21vw; 
-            font-weight: 700;
-            line-height: 0.8;
-            letter-spacing: -1.2vw; 
-            white-space: nowrap;
-            pointer-events: none; 
-        }
-
-        @media (max-width: 768px) {
-            .footer-top { flex-direction: column; gap: 30px; text-align: left !important; }
-            .footer-column { text-align: left !important; }
-            .footer-big-title { font-size: 45vw; bottom: -5vw; }
-            .site-footer { min-height: 450px; padding: 60px 20px 0 20px; }
-        }
-
-        .cookie-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(26, 26, 26, 0.9);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            backdrop-filter: blur(5px);
-        }
-
-        .cookie-card {
-            background: #fffad7;
-            padding: 40px;
-            border: 4px solid #1a1a1a;
-            max-width: 500px;
-            text-align: center;
-            font-family: 'Montserrat', sans-serif;
-        }
-
-        .cookie-card h2 {
-            font-size: 2rem;
-            margin-bottom: 20px;
-            font-weight: 700;
-        }
-
-        .cookie-card p {
-            margin-bottom: 30px;
-            line-height: 1.5;
-            text-transform: uppercase;
-            font-size: 0.9rem;
-            letter-spacing: 1px;
-        }
-
-        .cookie-btn {
-            background: #1a1a1a;
-            color: #fffad7;
-            border: none;
-            padding: 15px 40px;
-            font-weight: 700;
-            cursor: pointer;
-            font-family: 'Montserrat', sans-serif;
-            transition: 0.3s;
-        }
-
-        .cookie-btn:hover {
-            transform: scale(1.05);
-            background: #333;
-        }
-
-        /* --- НОВЫЕ ДОПОЛНИТЕЛЬНЫЕ СТИЛИ ДЛЯ ВСТРОЕННЫХ СТРАНИЦ --- */
-        
-        /* Контейнер для картинок-заглушек (скрываем нарисованное меню на скриншотах) */
-        .placeholder-container {
-            width: 100%;
-            overflow: hidden;
-            background-color: #fffad7;
-        }
-        
-        .placeholder-image {
-            width: 100%;
-            display: block;
-            height: auto;
-            /* Смещаем картинку вверх, чтобы спрятать нарисованное меню под реальное */
-            margin-top: -66px; 
-        }
-
-        /* Специфические стили для полноценной страницы карты */
-        .map-section {
-            max-width: 1200px;
-            width: 100%;
-            margin: 0 auto;
-            padding: 60px 60px 40px 60px;
-            background-color: #fffad7;
-        }
-
-        .map-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.8rem;
-            margin-bottom: 40px;
-            font-weight: 700;
-        }
-
-        .map-frame {
-            border: 1px solid rgba(0,0,0,0.1);
-            background-color: transparent;
-            margin-bottom: 25px;
-            width: 100%;
-        }
-
-        .map-image {
-            width: 100%;
-            display: block;
-            height: auto;
-        }
-
-        .map-footer {
-            display: flex;
-            gap: 60px;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            opacity: 0.6;
-            padding-bottom: 40px;
-        }
-
-        .characters-wrap { max-width: 1200px; width: 100%; margin: 0 auto; padding: 60px 0; }
-.characters-header { margin-bottom: 24px; }
-.characters-subtitle { font-family: 'Montserrat', sans-serif; font-size: 0.95rem; opacity: 0.75; margin-top: 10px; }
-.characters-grid { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(320px, 0.8fr); gap: 24px; align-items: start; margin-bottom: 50px; }
-.graph-card, .graph-info-panel { background: rgba(255,255,255,0.25); border: 1px solid rgba(0,0,0,0.08); border-radius: 18px; padding: 18px; }
-.graph-toolbar { display:flex; justify-content:space-between; font-family:'Montserrat',sans-serif; font-size:0.78rem; text-transform:uppercase; letter-spacing:1px; margin-bottom:14px; opacity:0.75; }
-.cy { width:100%; height:680px; background:#fff8cf; border-radius:14px; }
-.characters-map-block { margin-top: 40px; }
-.graph-info-panel h3 { font-family:'Playfair Display', serif; font-size:1.8rem; margin-bottom: 12px; }
-.graph-info-panel p { font-family:'Lora', serif; line-height:1.75; opacity:0.82; }
-
-@media (max-width: 980px) {
-  .characters-grid { grid-template-columns: 1fr; }
-  .cy { height: 520px; }
-}
-
-@media (max-width: 768px) {
-  .cy { height: 420px; }
-}
-    </style>
-    <script src="https://unpkg.com/cytoscape@3.29.2/dist/cytoscape.min.js"></script>
-</head>
-<body>
-
-    <section class="hero" id="hero-block">
-        <div class="hero-image-container"></div>
-    </section>
-        
-    <nav class="bottom-nav">
-        <div class="logo">
-            <strong>PagePath</strong> & Мастер и Маргарита
-        </div>
-        <ul class="nav-links">
-            <li><a href="#intro">интро</a></li>
-            <li><a href="#map">карта</a></li>
-            <li><a href="#characters">персонажи</a></li>
-            <li><a href="#illustrations">иллюстрации</a></li>
-            <li><a href="#forum">форум</a></li>
-        </ul>
-    </nav>
-
-    <section id="intro" class="content-section tab-content">
-        <div class="intro-grid-container">
-            <div class="intro-left">
-                <h3>ИНТРО</h3>
-                <blockquote class="quote">
-                    <p>... Так кто ж ты, наконец?<br>
-                    — Я — часть той силы,<br>
-                    что вечно хочет зла<br>
-                    и вечно совершает благо.</p>
-                    <cite>Гете, «Фауст»</cite>
-                </blockquote>
-            </div>
-
-            <div class="intro-right">
-                <h2>Добро пожаловать!</h2>
-                <div class="main-text">
-                    <p>Это роман о любви, свободе, силе искусства и природе зла, где московская реальность 1930-х годов переплетается с библейскими событиями, а сатира соседствует с глубокими философскими вопросами.</p>
-                    <p>На этой платформе вы найдёте карту всех миров, представленных в книге — от Патриарших прудов до Бала у Сатаны, граф со связями всех персонажей, который поможет разобраться в хитросплетениях их судеб, уникальные иллюстрации, запечатлевшие любимых героев, а также форум, где люди делятся своим мнением, спорят о рукописях, которые не горят, и находят единомышленников.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="map" class="tab-content" style="display: none;">
-        <div class="map-section">
-            <h2 class="map-title">Карта миров</h2>
-            <div class="map-frame">
-                <img src="33.png" alt="Карта миров Мастера и Маргариты" class="map-image">
-            </div>
-            <div class="map-footer">
-                <span>Карта нарисована вручную</span>
-                <span>Иллюстратор IRINMRMR</span>
-                <span>Версия 1.0</span>
-            </div>
-        </div>
-    </section>
-
-    <section id="characters" class="tab-content" style="display: none;">
-  <div class="characters-wrap">
-    <div class="characters-header">
-      <h2 class="map-title">Персонажи</h2>
-      <p class="characters-subtitle">Интерактивный граф и карта локаций объединены в одном разделе.</p>
-    </div>
-    <div class="characters-grid">
-      <div class="graph-card">
-        <div class="graph-toolbar">
-          <span>Граф персонажей</span>
-          <span class="graph-hint">Нажмите на узел</span>
-        </div>
-        <div id="cy" class="cy"></div>
-      </div>
-      <div class="graph-info-panel" id="graph-info-panel">
-        <h3>Выберите персонажа</h3>
-        <p>Нажмите на узел графа, чтобы увидеть описание героя, его мир и легенду связей.</p>
-      </div>
-    </div>
-  </div>
-  <div class="characters-map-block">
-    <div class="map-section">
-      <h2 class="map-title">Карта локаций</h2>
-      <div class="map-frame">
-        <img src="Itog_lokatsii.jpg" alt="Карта Москвы с локациями" class="map-image">
-      </div>
-      <div class="map-footer">
-        <span>Карта нарисована вручную</span>
-        <span>Иллюстратор IRINMRMR</span>
-        <span>Версия 1.0</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-    <section id="characters" class="tab-content" style="display: none;">
-        <div class="placeholder-container">
-            <img src="00.jpg" alt="Граф персонажей" class="placeholder-image">
-        </div>
-    </section>
-
-    <section id="illustrations" class="tab-content" style="display: none;">
-        <div class="placeholder-container">
-            <img src="11.jpg" alt="Иллюстрации" class="placeholder-image">
-        </div>
-    </section>
-
-    <section id="forum" class="tab-content" style="display: none;">
-        <div class="placeholder-container">
-            <img src="22.png" alt="Форум" class="placeholder-image">
-        </div>
-    </section>
-
-    <footer class="site-footer">
-        <div class="footer-top">
-            <div class="footer-column">
-                <p>ПРОЕКТ СОЗДАН ЧИТАТЕЛЯМИ<br>ДЛЯ ЧИТАТЕЛЕЙ</p>
-            </div>
-            <div class="footer-column">
-                <p>СВЯЗАТЬСЯ С НАМИ<br>PAGEPATH@MAIL.RU</p>
-            </div>
-            <div class="footer-column">
-                <p>НАД ПРОЕКТОМ РАБОТАЛИ (тг)<br>
-                [DARR_YAAS]<br>
-                [VICDENN]<br>
-                [ARUISSHA]<br>
-                [IRINMRMR]</p>
-            </div>
-        </div>
-        
-        <h1 class="footer-big-title">PagePath</h1>
-    </footer>
-
-    <div id="cookie-overlay" class="cookie-overlay">
-        <div class="cookie-card">
-            <h2>МЫ ИСПОЛЬЗУЕМ КУКИ</h2>
-            <p>Для корректной работы PagePath и вашего удобства нам нужно ваше разрешение на использование файлов cookie.</p>
-            <button onclick="acceptCookies()" class="cookie-btn">РАЗРЕШИТЬ</button>
-        </div>
-    </div>
-
-    <script>
-
-        function initGraph(){
-  const el = document.getElementById('cy');
-  const info = document.getElementById('graph-info-panel');
-  if(!el || typeof cytoscape === 'undefined') return;
-  const cy = cytoscape({
-    container: el,
-    elements: [
-      { data: { id: 'master', label: 'Мастер', world: 'Москва', desc: 'Главный герой и автор романа о Понтии Пилате.' } },
-      { data: { id: 'margarita', label: 'Маргарита', world: 'Москва', desc: 'Возлюбленная и муза Мастера.' } },
-      { data: { id: 'voland', label: 'Воланд', world: 'Потусторонний мир', desc: 'Повелитель тёмных сил и центральная мистическая фигура.' } },
-      { data: { id: 'pilat', label: 'Понтий Пилат', world: 'Ершалаим', desc: 'Римский прокуратор, связанный с ершалаимской линией.' } },
-      { data: { id: 'yeshua', label: 'Иешуа', world: 'Ершалаим', desc: 'Философ, чья история связана с Понтием Пилатом.' } },
-      { data: { id: 'begemot', label: 'Бегемот', world: 'Потусторонний мир', desc: 'Кот-оборотень из свиты Воланда.' } },
-      { data: { id: 'koroviev', label: 'Коровьев', world: 'Потусторонний мир', desc: 'Член свиты Воланда.' } },
-      { data: { id: 'azazello', label: 'Азазелло', world: 'Потусторонний мир', desc: 'Демон-убийца из свиты Воланда.' } },
-      { data: { id: 'gella', label: 'Гелла', world: 'Потусторонний мир', desc: 'Служанка Воланда.' } },
-      { data: { id: 'berlioz', label: 'Берлиоз', world: 'Москва', desc: 'Председатель МАССОЛИТа.' } },
-      { data: { id: 'bezdomny', label: 'Бездомный', world: 'Москва', desc: 'Молодой поэт и член МАССОЛИТа.' } },
-      { data: { id: 'varenuha', label: 'Варенуха', world: 'Москва', desc: 'Администратор театра Варьете.' } },
-      { data: { id: 'rimsky', label: 'Римский', world: 'Москва', desc: 'Финансовый директор театра Варьете.' } },
-      { data: { source: 'master', target: 'margarita' } },
-      { data: { source: 'margarita', target: 'voland' } },
-      { data: { source: 'voland', target: 'begemot' } },
-      { data: { source: 'voland', target: 'koroviev' } },
-      { data: { source: 'voland', target: 'azazello' } },
-      { data: { source: 'voland', target: 'gella' } },
-      { data: { source: 'master', target: 'berlioz' } },
-      { data: { source: 'berlioz', target: 'bezdomny' } },
-      { data: { source: 'master', target: 'varenuha' } },
-      { data: { source: 'margarita', target: 'varenuha' } },
-      { data: { source: 'varenuha', target: 'rimsky' } },
-      { data: { source: 'pilat', target: 'yeshua' } },
-      { data: { source: 'pilat', target: 'master' } },
-      { data: { source: 'pilat', target: 'margarita' } },
-    ],
-    style: [
-      { selector: 'node', style: { 'label': 'data(label)', 'text-valign': 'center', 'text-halign': 'center', 'background-color': ele => ele.data('world') === 'Москва' ? '#3b82f6' : ele.data('world') === 'Ершалаим' ? '#d97706' : '#7c3aed', 'color':'#1a1a1a', 'font-size':'11px', 'font-family':'Montserrat, sans-serif', 'font-weight':'700', 'width':58, 'height':58, 'border-width':1.5, 'border-color':'#fff' } },
-      { selector: 'edge', style: { 'width': 2.5, 'line-color':'#9ca3af', 'target-arrow-color':'#9ca3af', 'target-arrow-shape':'triangle', 'curve-style':'bezier' } },
-      { selector: '.faded', style: { 'opacity': 0.12 } },
-    ],
-    layout: { name: 'cose', animate: true, fit: true, padding: 30 }
-  });
-  cy.on('tap', 'node', function(evt){
-    const d = evt.target.data();
-    info.innerHTML = `<h3>${d.label}</h3><p><strong>Мир:</strong> ${d.world}</p><p>${d.desc}</p>`;
-    cy.elements().addClass('faded');
-    evt.target.removeClass('faded');
-    evt.target.connectedEdges().removeClass('faded');
-    evt.target.connectedEdges().connectedNodes().removeClass('faded');
-  });
-  cy.on('tap', function(evt){
-    if(evt.target === cy){
-      cy.elements().removeClass('faded');
-      info.innerHTML = '<h3>Выберите персонажа</h3><p>Нажмите на узел графа, чтобы увидеть описание героя, его мир и легенду связей.</p>';
-    }
-  });
-}
-        // Проверка куки при загрузке
-        window.onload = function() {
-            if (!localStorage.getItem('cookiesAccepted')) {
-                document.getElementById('cookie-overlay').style.display = 'flex';
-            }
-        };
-
-        // Функция подтверждения куки
-        function acceptCookies() {
-            localStorage.setItem('cookiesAccepted', 'true');
-            document.getElementById('cookie-overlay').style.display = 'none';
-        }
-
-        // Логика SPA переключения вкладок
-        const navLinks = document.querySelectorAll('.nav-links a');
-        const tabs = document.querySelectorAll('.tab-content');
-        const heroBlock = document.getElementById('hero-block');
-
-        navLinks.forEach(link => {
-            link.addEventListener('click', function(e) {
-                const targetId = this.getAttribute('href');
-                
-                // Работаем только со ссылками-хэшами внутри этой страницы
-                if (targetId.startsWith('#')) {
-                    e.preventDefault();
-
-                    // 1. Показываем большой Hero-баннер только на вкладке Интро
-                    if (targetId === '#intro') {
-                        heroBlock.style.display = 'block';
-                    } else {
-                        heroBlock.style.display = 'none';
-                    }
-
-                    // 2. Скрываем абсолютно все вкладки контента
-                    tabs.forEach(tab => {
-                        tab.style.display = 'none';
-                    });
-
-                    // 3. Активируем нужную вкладку
-                    const activeTab = document.querySelector(targetId);
-                    if (activeTab) {
-                        if (targetId === '#intro') {
-                            activeTab.style.display = 'flex'; // Твое оригинальное свойство для интро-сетки
-                            
-                            // Плавный скролл к интро с учетом высоты шапки (как в твоем коде)
-                            const offset = 60;
-                            const bodyRect = document.body.getBoundingClientRect().top;
-                            const elementRect = activeTab.getBoundingClientRect().top;
-                            const elementPosition = elementRect - bodyRect;
-                            const offsetPosition = elementPosition - offset;
-
-                            window.scrollTo({
-                                top: offsetPosition,
-                                behavior: 'smooth'
-                            });
-                        } else {
-                            activeTab.style.display = 'block'; // Обычный блочный вывод для заглушек и карт
-                            // Перемещаем скролл на самый верх страницы, чтобы просмотр начинался сначала
-                            window.scrollTo({ top: 0, behavior: 'smooth' });
-                        }
-                    }
-                }
-            });
-        });
-    </script>
-</body>
-</html> -->
-
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Литари — DH project</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@400;700&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
-  <script src="https://unpkg.com/cytoscape@3.29.2/dist/cytoscape.min.js"></script>
-  <style>
-    *{margin:0;padding:0;box-sizing:border-box}body{font-family:'Lora',serif;background:#fffad7!important;color:#1a1a1a;overflow-x:hidden;scroll-behavior:smooth}.hero{height:calc(100vh - 60px);position:relative;overflow:hidden}.hero-image-container{position:absolute;inset:0;background:url('illustration.jpeg') no-repeat center top;background-size:cover}.bottom-nav{position:sticky;top:0;height:60px;display:flex;justify-content:space-between;align-items:center;padding:0 60px;background:#fffad7;z-index:1000;box-shadow:0 2px 5px rgba(0,0,0,.05)}.logo{display:flex;align-items:baseline;gap:0}.logo-main{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;letter-spacing:1px;line-height:1}.logo-apostrophe{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;color:#1a1a1a;position:relative;top:-3px;margin-left:1px;margin-right:1px}.logo-sub{font-family:'Montserrat',sans-serif;font-size:0.72rem;font-weight:400;opacity:0.65;letter-spacing:0.5px;margin-left:8px;text-transform:none}.nav-links{list-style:none;display:flex;gap:40px}.nav-links a{font-family:'Montserrat',sans-serif;text-decoration:none;color:#1a1a1a;font-size:.9rem;text-transform:lowercase;letter-spacing:.5px}.content-section{min-height:100vh;padding:100px 60px;display:flex;justify-content:center;background:#fffad7}.intro-grid-container{max-width:1200px;width:100%;display:grid;grid-template-columns:3fr 7fr;gap:60px}.intro-left h3,.map-title{font-family:'Playfair Display',serif}.intro-left h3{font-size:1.5rem;text-transform:uppercase;margin-bottom:30px;letter-spacing:2px}.quote{font-family:'Playfair Display',serif;font-style:italic;font-size:1.2rem;line-height:1.6}.quote cite{font-family:'Montserrat',sans-serif;display:block;margin-top:10px;font-size:.8rem;font-style:normal;font-weight:700;opacity:.7;text-transform:uppercase}.intro-right h2{font-family:'Playfair Display',serif;font-size:2.8rem;margin-bottom:40px}.main-text p{font-size:1.1rem;line-height:1.8;margin-bottom:25px}.main-text p:first-child{font-family:'Montserrat',sans-serif;font-weight:700;font-size:.95rem;letter-spacing:.5px}.site-footer{background:#fffad7;color:#1a1a1a;padding:100px 60px 0;font-family:'Montserrat',sans-serif;text-transform:uppercase;border-top:1px solid rgba(0,0,0,.05);position:relative;overflow:hidden;min-height:430px;display:flex;flex-direction:column}.footer-top{display:flex;justify-content:space-between;align-items:flex-start;position:relative;z-index:10;font-size:.75rem;line-height:1.6;letter-spacing:1px}.footer-column{flex:1}.footer-column:nth-child(2){text-align:center}.footer-column:nth-child(3){text-align:right}.footer-big-title{position:absolute;bottom:-4vw;left:-7vw;font-family:'Montserrat',sans-serif;font-size:26vw;font-weight:700;line-height:.8;letter-spacing:-1vw;white-space:nowrap;pointer-events:none}.cookie-overlay{position:fixed;inset:0;background:rgba(26,26,26,.9);display:none;justify-content:center;align-items:center;z-index:9999;backdrop-filter:blur(5px)}.cookie-card{background:#fffad7;padding:40px;border:4px solid #1a1a1a;max-width:500px;text-align:center;font-family:'Montserrat',sans-serif}.cookie-card h2{font-size:2rem;margin-bottom:20px;font-weight:700}.cookie-card p{margin-bottom:30px;line-height:1.5;text-transform:uppercase;font-size:.9rem;letter-spacing:1px}.cookie-btn{background:#1a1a1a;color:#fffad7;border:none;padding:15px 40px;font-weight:700;cursor:pointer;font-family:'Montserrat',sans-serif;transition:.3s}.placeholder-container{width:100%;overflow:hidden;background:#fffad7}.placeholder-image{width:100%;display:block;height:auto;margin-top:-66px}.map-section{max-width:1200px;width:100%;margin:0 auto;padding:60px 60px 40px;background:#fffad7}.map-frame{position:relative;border:1px solid rgba(0,0,0,.1);margin-bottom:25px;width:100%;overflow:hidden;background:#fff}.map-stage{position:relative;width:100%}.map-image{width:100%;display:block;height:auto}.markers-layer{position:absolute;inset:0}.map-marker{position:absolute;width:18px;height:18px;border:2px solid #fff;background:#433629;border-radius:50%;transform:translate(-50%,-50%);cursor:pointer;pointer-events:auto}.map-marker:hover,.map-marker.is-active{transform:translate(-50%,-50%) scale(1.2);background:#a06c30;box-shadow:0 0 0 10px rgba(160,108,48,.18)}.map-marker-label{position:absolute;top:-26px;left:50%;transform:translateX(-50%);background:#fffad7;border:1px solid rgba(0,0,0,.12);padding:2px 6px;border-radius:999px;font:600 11px Montserrat,sans-serif;opacity:0;pointer-events:none;white-space:nowrap}.map-marker:hover .map-marker-label,.map-marker.is-active .map-marker-label{opacity:1}.map-footer{display:flex;gap:60px;font-family:'Montserrat',sans-serif;font-size:.8rem;text-transform:uppercase;letter-spacing:1px;opacity:.6;padding-bottom:40px;flex-wrap:wrap}.characters-wrap{max-width:1200px;width:100%;margin:0 auto;padding:60px 0}.characters-subtitle{font-family:'Montserrat',sans-serif;font-size:.95rem;opacity:.75;margin-top:10px}.characters-grid{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(320px,.8fr);gap:24px;align-items:start;margin-bottom:50px}.graph-card,.graph-info-panel{background:rgba(255,255,255,.25);border:1px solid rgba(0,0,0,.08);border-radius:18px;padding:18px}.graph-toolbar{display:flex;justify-content:space-between;font-family:'Montserrat',sans-serif;font-size:.78rem;text-transform:uppercase;letter-spacing:1px;margin-bottom:14px;opacity:.75}.cy{width:100%;height:680px;background:#fff8cf;border-radius:14px}.graph-info-panel h3{font-family:'Playfair Display',serif;font-size:1.8rem;margin-bottom:12px}.graph-info-panel p{font-family:'Lora',serif;line-height:1.75;opacity:.82}.graph-legend{margin-top:18px;padding-top:14px;border-top:1px solid rgba(0,0,0,.08)}.graph-legend h4{font-family:'Montserrat',sans-serif;font-size:.78rem;text-transform:uppercase;letter-spacing:1px;margin-bottom:12px;opacity:.85}.legend-item{display:flex;align-items:center;gap:10px;margin-bottom:10px;font-family:'Montserrat',sans-serif;font-size:.78rem;line-height:1.4}.legend-dot{width:12px;height:12px;border-radius:50%;flex-shrink:0}@media (max-width:980px){.characters-grid{grid-template-columns:1fr}.cy{height:520px}}@media (max-width:768px){.footer-top{flex-direction:column;gap:30px;text-align:left!important}.footer-column{text-align:left!important}.footer-big-title{font-size:45vw;bottom:-5vw}.site-footer{min-height:450px;padding:60px 20px 0 20px}.cy{height:420px}}
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Литари — DH project</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@400;700&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/cytoscape@3.29.2/dist/cytoscape.min.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Lora',serif;background:#fffad7!important;color:#1a1a1a;overflow-x:hidden;scroll-behavior:smooth}.hero{height:calc(100vh - 60px);position:relative;overflow:hidden}.hero-image-container{position:absolute;inset:0;background:url('illustration.jpeg') no-repeat center top;background-size:cover}.bottom-nav{position:sticky;top:0;height:60px;display:flex;justify-content:space-between;align-items:center;padding:0 60px;background:#fffad7;z-index:1000;box-shadow:0 2px 5px rgba(0,0,0,.05)}.logo{display:flex;align-items:baseline;gap:0}.logo-main{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;letter-spacing:1px;line-height:1}.logo-apostrophe{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;color:#1a1a1a;position:relative;top:-3px;margin-left:1px;margin-right:1px}.logo-sub{font-family:'Montserrat',sans-serif;font-size:0.72rem;font-weight:400;opacity:0.65;letter-spacing:0.5px;margin-left:8px;text-transform:none}.nav-links{list-style:none;display:flex;gap:40px}.nav-links a{font-family:'Montserrat',sans-serif;text-decoration:none;color:#1a1a1a;font-size:.9rem;text-transform:lowercase;letter-spacing:.5px}.content-section{min-height:100vh;padding:100px 60px;display:flex;justify-content:center;background:#fffad7}.intro-grid-container{max-width:1200px;width:100%;display:grid;grid-template-columns:3fr 7fr;gap:60px}.intro-left h3,.map-title{font-family:'Playfair Display',serif}.intro-left h3{font-size:1.5rem;text-transform:uppercase;margin-bottom:30px;letter-spacing:2px}.quote{font-family:'Playfair Display',serif;font-style:italic;font-size:1.2rem;line-height:1.6}.quote cite{font-family:'Montserrat',sans-serif;display:block;margin-top:10px;font-size:.8rem;font-style:normal;font-weight:700;opacity:.7;text-transform:uppercase}.intro-right h2{font-family:'Playfair Display',serif;font-size:2.8rem;margin-bottom:40px}.main-text p{font-size:1.1rem;line-height:1.8;margin-bottom:25px}.main-text p:first-child{font-family:'Montserrat',sans-serif;font-weight:700;font-size:.95rem;letter-spacing:.5px}.site-footer{background:#fffad7;color:#1a1a1a;padding:100px 60px 0;font-family:'Montserrat',sans-serif;text-transform:uppercase;border-top:1px solid rgba(0,0,0,.05);position:relative;overflow:hidden;min-height:430px;display:flex;flex-direction:column}.footer-top{display:flex;justify-content:space-between;align-items:flex-start;position:relative;z-index:10;font-size:.75rem;line-height:1.6;letter-spacing:1px}.footer-column{flex:1}.footer-column:nth-child(2){text-align:center}.footer-column:nth-child(3){text-align:right}.footer-big-title{position:absolute;bottom:-4vw;left:-7vw;font-family:'Montserrat',sans-serif;font-size:26vw;font-weight:700;line-height:.8;letter-spacing:-1vw;white-space:nowrap;pointer-events:none}.cookie-overlay{position:fixed;inset:0;background:rgba(26,26,26,.9);display:none;justify-content:center;align-items:center;z-index:9999;backdrop-filter:blur(5px)}.cookie-card{background:#fffad7;padding:40px;border:4px solid #1a1a1a;max-width:500px;text-align:center;font-family:'Montserrat',sans-serif}.cookie-card h2{font-size:2rem;margin-bottom:20px;font-weight:700}.cookie-card p{margin-bottom:30px;line-height:1.5;text-transform:uppercase;font-size:.9rem;letter-spacing:1px}.cookie-btn{background:#1a1a1a;color:#fffad7;border:none;padding:15px 40px;font-weight:700;cursor:pointer;font-family:'Montserrat',sans-serif;transition:.3s}.placeholder-container{width:100%;overflow:hidden;background:#fffad7}.placeholder-image{width:100%;display:block;height:auto;margin-top:-66px}.map-section{max-width:1200px;width:100%;margin:0 auto;padding:60px 60px 40px;background:#fffad7}.map-frame{position:relative;border:1px solid rgba(0,0,0,.1);margin-bottom:25px;width:100%;overflow:hidden;background:#fff}.map-stage{position:relative;width:100%}.map-image{width:100%;display:block;height:auto}.markers-layer{position:absolute;inset:0}.map-marker{position:absolute;width:18px;height:18px;border:2px solid #fff;background:#433629;border-radius:50%;transform:translate(-50%,-50%);cursor:pointer;pointer-events:auto}.map-marker:hover,.map-marker.is-active{transform:translate(-50%,-50%) scale(1.2);background:#a06c30;box-shadow:0 0 0 10px rgba(160,108,48,.18)}.map-marker-label{position:absolute;top:-26px;left:50%;transform:translateX(-50%);background:#fffad7;border:1px solid rgba(0,0,0,.12);padding:2px 6px;border-radius:999px;font:600 11px Montserrat,sans-serif;opacity:0;pointer-events:none;white-space:nowrap}.map-marker:hover .map-marker-label,.map-marker.is-active .map-marker-label{opacity:1}.map-footer{display:flex;gap:60px;font-family:'Montserrat',sans-serif;font-size:.8rem;text-transform:uppercase;letter-spacing:1px;opacity:.6;padding-bottom:40px;flex-wrap:wrap}.characters-wrap{max-width:1200px;width:100%;margin:0 auto;padding:60px 0}.characters-subtitle{font-family:'Montserrat',sans-serif;font-size:.95rem;opacity:.75;margin-top:10px}.characters-grid{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(320px,.8fr);gap:24px;align-items:start;margin-bottom:50px}.graph-card,.graph-info-panel{background:rgba(255,255,255,.25);border:1px solid rgba(0,0,0,.08);border-radius:18px;padding:18px}.graph-toolbar{display:flex;justify-content:space-between;font-family:'Montserrat',sans-serif;font-size:.78rem;text-transform:uppercase;letter-spacing:1px;margin-bottom:14px;opacity:.75}.cy{width:100%;height:680px;background:#fff8cf;border-radius:14px}.graph-info-panel h3{font-family:'Playfair Display',serif;font-size:1.8rem;margin-bottom:12px}.graph-info-panel p{font-family:'Lora',serif;line-height:1.75;opacity:.82}.graph-legend{margin-top:18px;padding-top:14px;border-top:1px solid rgba(0,0,0,.08)}.graph-legend h4{font-family:'Montserrat',sans-serif;font-size:.78rem;text-transform:uppercase;letter-spacing:1px;margin-bottom:12px;opacity:.85}.legend-item{display:flex;align-items:center;gap:10px;margin-bottom:10px;font-family:'Montserrat',sans-serif;font-size:.78rem;line-height:1.4}.legend-dot{width:12px;height:12px;border-radius:50%;flex-shrink:0}@media (max-width:980px){.characters-grid{grid-template-columns:1fr}.cy{height:520px}}@media (max-width:768px){.footer-top{flex-direction:column;gap:30px;text-align:left!important}.footer-column{text-align:left!important}.footer-big-title{font-size:45vw;bottom:-5vw}.site-footer{min-height:450px;padding:60px 20px 0 20px}.cy{height:420px}}
+.forum-wrap{display:grid;grid-template-columns:1fr 320px;max-width:1200px;margin:0 auto;padding:60px;gap:0;min-height:100vh;background:#fffad7}
+.forum-main{border-right:1px solid rgba(0,0,0,.12);padding-right:60px}
+.forum-header{display:flex;justify-content:space-between;align-items:baseline;padding-bottom:20px;border-bottom:1px solid rgba(0,0,0,.12);margin-bottom:0}
+.forum-title{font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:700}
+.forum-new-btn{font-family:'Montserrat',sans-serif;font-size:.85rem;opacity:.7;cursor:default}
+.forum-tabs{display:flex;gap:40px;padding:22px 0;border-bottom:1px solid rgba(0,0,0,.12);margin-bottom:0}
+.forum-tab{font-family:'Lora',serif;font-size:1rem;cursor:default;opacity:.85}
+.forum-post{padding:32px 0;border-bottom:1px solid rgba(0,0,0,.08)}
+.forum-post-title{font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:700;margin-bottom:10px;font-style:italic}
+.forum-post-preview{font-family:'Lora',serif;font-size:.95rem;line-height:1.6;opacity:.7;margin-bottom:14px}
+.forum-post-meta{display:flex;align-items:center;gap:18px;font-family:'Montserrat',sans-serif;font-size:.8rem;opacity:.65}
+.forum-post-tag{border:1px solid rgba(0,0,0,.3);padding:2px 10px;border-radius:2px;opacity:1}
+.forum-sidebar{padding-left:50px;padding-top:0}
+.forum-sidebar-block{margin-bottom:40px;padding-top:40px}
+.forum-sidebar-title{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;margin-bottom:20px}
+.forum-hot-item{margin-bottom:22px}
+.forum-hot-name{font-family:'Lora',serif;font-size:.98rem;line-height:1.4;margin-bottom:4px}
+.forum-hot-meta{font-family:'Montserrat',sans-serif;font-size:.78rem;opacity:.6}
+.forum-members{font-family:'Montserrat',sans-serif;font-size:.85rem;margin-bottom:8px;opacity:.8}
+@media(max-width:768px){.forum-wrap{grid-template-columns:1fr;padding:30px 20px}.forum-main{border-right:none;padding-right:0}.forum-sidebar{padding-left:0}.forum-tabs{flex-wrap:wrap;gap:16px}}
+.illus-wrap{max-width:1400px;margin:0 auto;padding:60px 60px 80px;background:#fffad7}
+.illus-title{font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:700;padding-bottom:20px;border-bottom:1px solid rgba(0,0,0,.12);margin-bottom:0}
+.illus-chapters-bar{display:flex;gap:0;border-bottom:1px solid rgba(0,0,0,.12);margin-bottom:40px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.illus-chapters-bar::-webkit-scrollbar{display:none}
+.illus-ch-tab{font-family:'Lora',serif;font-size:.85rem;padding:16px 24px 14px;cursor:pointer;opacity:.55;line-height:1.4;border-bottom:2px solid transparent;transition:.2s;white-space:nowrap;flex-shrink:0}
+.illus-ch-tab:hover{opacity:.9}
+.illus-ch-tab.active{opacity:1;border-bottom:2px solid #1a1a1a;font-weight:700}
+.illus-featured{display:grid;grid-template-columns:400px 1fr;gap:0;border:1px solid rgba(0,0,0,.1);border-radius:4px;overflow:hidden;margin-bottom:16px;cursor:pointer;background:#fff;transition:.2s}
+.illus-featured:hover{box-shadow:0 4px 20px rgba(0,0,0,.1)}
+.illus-featured:hover .illus-featured-img img{transform:scale(1.03)}
+.illus-featured-img{overflow:hidden;height:300px}
+.illus-featured-img img{width:100%;height:100%;object-fit:cover;object-position:center top;transition:transform .4s ease;display:block}
+.illus-featured-info{padding:36px 40px;display:flex;flex-direction:column;justify-content:center}
+.illus-ch-label{font-family:'Montserrat',sans-serif;font-size:.78rem;opacity:.55;margin-bottom:10px;text-transform:uppercase;letter-spacing:.8px}
+.illus-ch-name{font-family:'Playfair Display',serif;font-size:1.9rem;font-weight:700;margin-bottom:20px}
+.illus-quote{font-family:'Lora',serif;font-size:1rem;line-height:1.7;opacity:.8;margin-bottom:16px}
+.illus-source{font-family:'Montserrat',sans-serif;font-size:.75rem;opacity:.45}
+.illus-grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-top:14px}
+.illus-thumb{overflow:hidden;border-radius:4px;cursor:pointer;height:270px;background:#e8e0cc;position:relative}
+.illus-thumb img{width:100%;height:100%;object-fit:cover;object-position:center;transition:transform .4s ease;display:block}
+.illus-thumb:hover img{transform:scale(1.06)}
+.illus-thumb--soon{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;cursor:default;border:1px dashed rgba(0,0,0,.18);border-radius:4px}
+.illus-soon-plus{font-size:2.2rem;opacity:.3;font-weight:300;line-height:1}
+.illus-soon-label{font-family:'Montserrat',sans-serif;font-size:.8rem;opacity:.35;text-transform:uppercase;letter-spacing:1.5px}
+.illus-coming-soon{display:flex;align-items:center;justify-content:center;height:320px;font-family:'Lora',serif;font-size:1.15rem;opacity:.45;font-style:italic}
+.illus-lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,.94);z-index:99999;align-items:center;justify-content:center}
+.illus-lightbox.open{display:flex}
+.illus-lb-img{max-width:92vw;max-height:92vh;object-fit:contain;border-radius:3px;box-shadow:0 0 60px rgba(0,0,0,.5)}
+.illus-lb-close{position:fixed;top:22px;right:28px;background:none;border:none;color:#fff;font-size:2rem;cursor:pointer;opacity:.75;transition:.2s;z-index:100000;line-height:1;font-family:sans-serif}
+.illus-lb-close:hover{opacity:1;transform:scale(1.1)}
+@media(max-width:900px){.illus-featured{grid-template-columns:1fr}.illus-featured-img{height:220px}.illus-grid-3{grid-template-columns:1fr 1fr}.illus-wrap{padding:30px 20px}}
+@media(max-width:600px){.illus-grid-3{grid-template-columns:1fr}.illus-ch-tab{padding:12px 16px;font-size:.8rem}}</style>
 </head>
 <body>
-  <section class="hero" id="hero-block"><div class="hero-image-container"></div></section>
+<section class="hero" id="hero-block"><div class="hero-image-container"></div></section>
 
-  <nav class="bottom-nav">
-    <div class="logo">
-      <span class="logo-main">ЛИ́ТАРИ</span>
-      <span class="logo-sub">& Мастер и Маргарита</span>
+
+<nav class="bottom-nav">
+<div class="logo">
+<span class="logo-main">ЛИ́ТАРИ</span>
+<span class="logo-sub">& Мастер и Маргарита</span>
+</div>
+<ul class="nav-links">
+<li><a href="#intro">интро</a></li>
+<li><a href="#map">карта</a></li>
+<li><a href="#characters">персонажи</a></li>
+<li><a href="#illustrations">иллюстрации</a></li>
+<li><a href="#forum">форум</a></li>
+</ul>
+</nav>
+
+
+<section id="intro" class="content-section tab-content"><div class="intro-grid-container"><div class="intro-left"><h3>ИНТРО</h3><blockquote class="quote"><p>... Так кто ж ты, наконец?<br>— Я — часть той силы,<br>что вечно хочет зла<br>и вечно совершает благо.</p><cite>Гете, «Фауст»</cite></blockquote></div><div class="intro-right"><h2>Добро пожаловать!</h2><div class="main-text"><p>Это роман о любви, свободе, силе искусства и природе зла, где московская реальность 1930-х годов переплетается с библейскими событиями, а сатира соседствует с глубокими философскими вопросами.</p><p>На этой платформе вы найдёте карту всех миров, представленных в книге — от Патриарших прудов до Бала у Сатаны, граф со связями всех персонажей, который поможет разобраться в хитросплетениях их судеб, уникальные иллюстрации, запечатлевшие любимых героев, а также форум, где люди делятся своим мнением, спорят о рукописях, которые не горят, и находят единомышленников.</p></div></div></div></section>
+
+
+<section id="map" class="tab-content" style="display:none;">
+<div class="map-section">
+<h2 class="map-title">Карта миров</h2>
+<div class="map-frame">
+<div class="map-stage">
+<img src="Itog_lokatsii.jpg" alt="Карта Москвы с локациями" class="map-image">
+<div class="markers-layer" id="markers-layer"></div>
+</div>
+</div>
+<div class="map-footer"><span>Карта нарисована вручную</span><span>Иллюстратор IRINMRMR</span><span>Версия 1.0</span></div>
+</div>
+</section>
+
+
+<section id="characters" class="tab-content" style="display:none;"><div class="characters-wrap"><div class="characters-header"><h2 class="map-title">Персонажи</h2><p class="characters-subtitle">Интерактивный граф персонажей романа «Мастер и Маргарита».</p></div><div class="characters-grid"><div class="graph-card"><div class="graph-toolbar"><span>Граф персонажей</span><span class="graph-hint">Нажмите на узел</span></div><div id="cy" class="cy"></div></div><div class="graph-info-panel" id="graph-info-panel"><h3>Выберите персонажа</h3><p>Нажмите на узел графа, чтобы увидеть описание героя, его мир и легенду связей.</p><div class="graph-legend"><h4>Легенда связей</h4><div class="legend-item"><span class="legend-dot" style="background:#b91c1c"></span><span>Любовь</span></div><div class="legend-item"><span class="legend-dot" style="background:#6d28d9"></span><span>Потусторонняя связь (свита Воланда)</span></div><div class="legend-item"><span class="legend-dot" style="background:#16a34a"></span><span>Служебные / подчинение</span></div><div class="legend-item"><span class="legend-dot" style="background:#0ea5e9"></span><span>Литературная среда (МАССОЛИТ)</span></div><div class="legend-item"><span class="legend-dot" style="background:#facc15"></span><span>Дружба / союз</span></div><div class="legend-item"><span class="legend-dot" style="background:#9ca3af"></span><span>Конфликт / напряжение</span></div><div class="legend-item"><span class="legend-dot" style="background:#f97316"></span><span>Предательство / корысть</span></div></div></div></div></div></section>
+
+
+<section id="illustrations" class="tab-content" style="display:none;">
+<div class="illus-wrap">
+<div class="illus-header">
+<h2 class="illus-title">Иллюстрации</h2>
+</div>
+
+
+<div class="illus-chapters-bar" id="illus-chapters-bar">
+  <span class="illus-ch-tab active" data-ch="all">Все главы</span>
+  <span class="illus-ch-tab" data-ch="1">Глава 1.<br>Никогда не разговаривайте с неизвестными</span>
+  <span class="illus-ch-tab" data-ch="2">Глава 2.<br>Понтий Пилат</span>
+  <span class="illus-ch-tab" data-ch="3">Глава 3.<br>Седьмое доказательство</span>
+  <span class="illus-ch-tab" data-ch="4">Глава 4.<br>Погоня</span>
+  <span class="illus-ch-tab" data-ch="5">Глава 5.<br>Было дело в Грибоедове</span>
+  <span class="illus-ch-tab" data-ch="6">Глава 6.<br>Шизофрения, как и было сказано</span>
+  <span class="illus-ch-tab" data-ch="7">Глава 7.<br>Нехорошая квартира</span>
+  <span class="illus-ch-tab" data-ch="8">Глава 8.<br>Поединок между профессором и поэтом</span>
+  <span class="illus-ch-tab" data-ch="9">Глава 9.<br>Коровьевские штуки</span>
+  <span class="illus-ch-tab" data-ch="10">Глава 10.<br>Вести из Ялты</span>
+  <span class="illus-ch-tab" data-ch="11">Глава 11.<br>Раздвоение Ивана</span>
+  <span class="illus-ch-tab" data-ch="12">Глава 12.<br>Чёрная магия и её разоблачение</span>
+  <span class="illus-ch-tab" data-ch="13">Глава 13.<br>Явление героя</span>
+  <span class="illus-ch-tab" data-ch="14">Глава 14.<br>Слава петуху!</span>
+  <span class="illus-ch-tab" data-ch="15">Глава 15.<br>Сон Никанора Ивановича</span>
+  <span class="illus-ch-tab" data-ch="16">Глава 16.<br>Казнь</span>
+  <span class="illus-ch-tab" data-ch="17">Глава 17.<br>Беспокойный день</span>
+  <span class="illus-ch-tab" data-ch="18">Глава 18.<br>Неудачливые визитёры</span>
+  <span class="illus-ch-tab" data-ch="19">Глава 19.<br>Маргарита</span>
+  <span class="illus-ch-tab" data-ch="20">Глава 20.<br>Крем Азазелло</span>
+  <span class="illus-ch-tab" data-ch="21">Глава 21.<br>Полёт</span>
+  <span class="illus-ch-tab" data-ch="22">Глава 22.<br>При свечах</span>
+  <span class="illus-ch-tab" data-ch="23">Глава 23.<br>Великий бал у сатаны</span>
+  <span class="illus-ch-tab" data-ch="24">Глава 24.<br>Извлечение мастера</span>
+  <span class="illus-ch-tab" data-ch="25">Глава 25.<br>Как прокуратор пытался спасти Иуду</span>
+  <span class="illus-ch-tab" data-ch="26">Глава 26.<br>Погребение</span>
+  <span class="illus-ch-tab" data-ch="27">Глава 27.<br>Конец квартиры №50</span>
+  <span class="illus-ch-tab" data-ch="28">Глава 28.<br>Последние похождения Коровьева и Бегемота</span>
+  <span class="illus-ch-tab" data-ch="29">Глава 29.<br>Судьба мастера и Маргариты определена</span>
+  <span class="illus-ch-tab" data-ch="30">Глава 30.<br>Пора! Пора!</span>
+  <span class="illus-ch-tab" data-ch="31">Глава 31.<br>На Воробьёвых горах</span>
+  <span class="illus-ch-tab" data-ch="32">Глава 32.<br>Прощение и вечный приют</span>
+</div>
+
+<!-- Глава 23 — с иллюстрациями -->
+<div class="illus-block" id="illus-block-23" style="display:none;">
+  <div class="illus-featured" onclick="illusOpen('serial_bal.jpg')">
+    <div class="illus-featured-img">
+      <img src="serial_bal.jpg" alt="Великий бал у сатаны — сериал 2005">
     </div>
-    <ul class="nav-links">
-      <li><a href="#intro">интро</a></li>
-      <li><a href="#map">карта</a></li>
-      <li><a href="#characters">персонажи</a></li>
-      <li><a href="#illustrations">иллюстрации</a></li>
-      <li><a href="#forum">форум</a></li>
-    </ul>
-  </nav>
-
-  <section id="intro" class="content-section tab-content"><div class="intro-grid-container"><div class="intro-left"><h3>ИНТРО</h3><blockquote class="quote"><p>... Так кто ж ты, наконец?<br>— Я — часть той силы,<br>что вечно хочет зла<br>и вечно совершает благо.</p><cite>Гете, «Фауст»</cite></blockquote></div><div class="intro-right"><h2>Добро пожаловать!</h2><div class="main-text"><p>Это роман о любви, свободе, силе искусства и природе зла, где московская реальность 1930-х годов переплетается с библейскими событиями, а сатира соседствует с глубокими философскими вопросами.</p><p>На этой платформе вы найдёте карту всех миров, представленных в книге — от Патриарших прудов до Бала у Сатаны, граф со связями всех персонажей, который поможет разобраться в хитросплетениях их судеб, уникальные иллюстрации, запечатлевшие любимых героев, а также форум, где люди делятся своим мнением, спорят о рукописях, которые не горят, и находят единомышленников.</p></div></div></div></section>
-
-  <section id="map" class="tab-content" style="display:none;">
-    <div class="map-section">
-      <h2 class="map-title">Карта миров</h2>
-      <div class="map-frame">
-        <div class="map-stage">
-          <img src="Itog_lokatsii.jpg" alt="Карта Москвы с локациями" class="map-image">
-          <div class="markers-layer" id="markers-layer"></div>
-        </div>
-      </div>
-      <div class="map-footer"><span>Карта нарисована вручную</span><span>Иллюстратор IRINMRMR</span><span>Версия 1.0</span></div>
+    <div class="illus-featured-info">
+      <p class="illus-ch-label">Глава 23</p>
+      <h3 class="illus-ch-name">Великий бал у сатаны</h3>
+      <blockquote class="illus-quote">«Никогда и ничего не просите! Никогда и ничего, и в особенности у тех, кто сильнее вас. Они сами всё предложат и сами всё дадут!».</blockquote>
+      <p class="illus-source">Илл. «Мастер и Маргарита» сериал &nbsp;·&nbsp; год 2005</p>
     </div>
-  </section>
-
-  <section id="characters" class="tab-content" style="display:none;"><div class="characters-wrap"><div class="characters-header"><h2 class="map-title">Персонажи</h2><p class="characters-subtitle">Интерактивный граф персонажей романа «Мастер и Маргарита».</p></div><div class="characters-grid"><div class="graph-card"><div class="graph-toolbar"><span>Граф персонажей</span><span class="graph-hint">Нажмите на узел</span></div><div id="cy" class="cy"></div></div><div class="graph-info-panel" id="graph-info-panel"><h3>Выберите персонажа</h3><p>Нажмите на узел графа, чтобы увидеть описание героя, его мир и легенду связей.</p><div class="graph-legend"><h4>Легенда связей</h4><div class="legend-item"><span class="legend-dot" style="background:#b91c1c"></span><span>Любовь</span></div><div class="legend-item"><span class="legend-dot" style="background:#6d28d9"></span><span>Потусторонняя связь (свита Воланда)</span></div><div class="legend-item"><span class="legend-dot" style="background:#16a34a"></span><span>Служебные / подчинение</span></div><div class="legend-item"><span class="legend-dot" style="background:#0ea5e9"></span><span>Литературная среда (МАССОЛИТ)</span></div><div class="legend-item"><span class="legend-dot" style="background:#facc15"></span><span>Дружба / союз</span></div><div class="legend-item"><span class="legend-dot" style="background:#9ca3af"></span><span>Конфликт / напряжение</span></div><div class="legend-item"><span class="legend-dot" style="background:#f97316"></span><span>Предательство / корысть</span></div></div></div></div></div></section>
-
-  <section id="illustrations" class="tab-content" style="display:none;"><div class="placeholder-container"><img src="11.jpg" alt="Иллюстрации" class="placeholder-image"></div></section>
-  <section id="forum" class="tab-content" style="display:none;"><div class="placeholder-container"><img src="22.png" alt="Форум" class="placeholder-image"></div></section>
-
-  <footer class="site-footer">
-    <div class="footer-top">
-      <div class="footer-column"><p>ПРОЕКТ СОЗДАН ЧИТАТЕЛЯМИ<br>ДЛЯ ЧИТАТЕЛЕЙ</p></div>
-      <div class="footer-column"><p>СВЯЗАТЬСЯ С НАМИ<br>LITARI@MAIL.RU</p></div>
-      <div class="footer-column"><p>НАД ПРОЕКТОМ РАБОТАЛИ <br>[DARR_YAAS]<br>[VICDENN]<br>[ARUISSHA]<br>[IRINMRMR]</p></div>
+  </div>
+  <div class="illus-grid-3">
+    <div class="illus-thumb" onclick="illusOpen('pri_svechah.jpg')">
+      <img src="pri_svechah.jpg" alt="При свечах">
     </div>
-    <h1 class="footer-big-title">ЛИТАРИ</h1>
-  </footer>
+    <div class="illus-thumb" onclick="illusOpen('bal_painting.jpg')">
+      <img src="bal_painting.jpg" alt="Великий бал — живопись">
+    </div>
+    <div class="illus-thumb illus-thumb--soon">
+      <span class="illus-soon-plus">+</span>
+      <span class="illus-soon-label">Скоро</span>
+    </div>
+  </div>
+</div>
 
-  <div id="cookie-overlay" class="cookie-overlay"><div class="cookie-card"><h2>МЫ ИСПОЛЬЗУЕМ КУКИ</h2><p>Для корректной работы PagePath и вашего удобства нам нужно ваше разрешение на использование файлов cookie.</p><button onclick="acceptCookies()" class="cookie-btn">РАЗРЕШИТЬ</button></div></div>
+<!-- Блок "скоро" для всех остальных глав -->
+<div class="illus-block illus-coming-soon" id="illus-block-soon" style="display:none;">
+  <p id="illus-soon-text">Иллюстрации скоро появятся</p>
+</div>
 
-  <script>
-    const markerData=[{id:1,x:8.2,y:81.8},{id:2,x:43.6,y:82.2},{id:3,x:92.3,y:72.3},{id:4,x:84.4,y:39.8},{id:5,x:63.8,y:31.8},{id:6,x:94.3,y:9.3},{id:7,x:42.3,y:12.8},{id:8,x:17.8,y:42.4},{id:9,x:59.2,y:55.6},{id:10,x:6.8,y:18.8}];
-    const locations=[{id:1,title:'Подвал Мастера',address:'Мансуровский переулок, 9, Москва',description:'В небольшом подвальном помещении жил и работал Мастер. Здесь был написан роман о Понтии Пилате, а также развивалась история любви Мастера и Маргариты.'},{id:2,title:'Дом Драмлита',address:'Лаврушинский переулок, 17, строение 2, Москва',description:'Маргарита, обернувшись ведьмой, беспощадно громит квартиру критика Латунского. Считается, что прообраз того самого дома находится в Лаврушинском переулке.'},{id:3,title:'Резиденция Воланда',address:'Воздвиженка, 3/5, строение 1, Москва',description:'Здесь разворачивается одна из самых пронзительных сцен: ученик Иешуа передаёт сатане просьбу своего учителя — подарить Мастеру и Маргарите вечный покой.'},{id:4,title:'Дом Грибоедова',address:'Тверской бульвар, 25, Москва',description:'В двухэтажном старинном доме размещается крупное объединение литераторов МАССОЛИТа под руководством Берлиоза, с роскошным рестораном на открытой веранде.'},{id:5,title:'Нехорошая квартира',address:'Большая Садовая, дом 10, квартира №50, Москва',description:'Квартира становится пристанищем Воланда и его свиты. Здесь происходят загадочные исчезновения, странные происшествия и мистические события.'},{id:6,title:'Театр Варьете',address:'Триумфальная площадь, 2, Москва',description:'В театре Воланд устраивает знаменитый сеанс чёрной магии. Представление превращается в одно из самых необычных событий романа.'},{id:7,title:'Дом Маргариты',address:'улица Спиридоновка, 17, Москва',description:'Здесь жила Маргарита до встречи с Мастером. На сегодняшний день исследователи творчества Булгакова насчитывают не меньше шести зданий, схожих с готическим особняком.'},{id:8,title:'Торгсин (Смоленский рынок)',address:'Арбат, 54/2, строение 1, Москва',description:'Здесь Коровьев и Бегемот устраивают одну из самых известных комических сцен романа, превращая магазин в настоящий хаос.'},{id:9,title:'Патриаршие пруды',address:'Патриаршие пруды, Москва',description:'Место, где впервые появляется Воланд. Здесь Иван Бездомный и Михаил Берлиоз заговаривают с таинственным незнакомцем.'},{id:10,title:'Воробьёвы горы',address:'Воробьёвы горы, Москва',description:'В финале романа Мастер и Маргарита прощаются здесь с Москвой перед тем, как отправиться на вечный покой.'}];
+<!-- Блок "все главы" — показывает 23-ю как превью -->
+<div class="illus-block" id="illus-block-all" style="display:none;">
+  <div class="illus-featured" onclick="illusOpen('serial_bal.jpg')">
+    <div class="illus-featured-img">
+      <img src="serial_bal.jpg" alt="Великий бал у сатаны — сериал 2005">
+    </div>
+    <div class="illus-featured-info">
+      <p class="illus-ch-label">Глава 23</p>
+      <h3 class="illus-ch-name">Великий бал у сатаны</h3>
+      <blockquote class="illus-quote">«Никогда и ничего не просите! Никогда и ничего, и в особенности у тех, кто сильнее вас. Они сами всё предложат и сами всё дадут!».</blockquote>
+      <p class="illus-source">Илл. «Мастер и Маргарита» сериал &nbsp;·&nbsp; год 2005</p>
+    </div>
+  </div>
+  <div class="illus-grid-3">
+    <div class="illus-thumb" onclick="illusOpen('pri_svechah.jpg')">
+      <img src="pri_svechah.jpg" alt="При свечах">
+    </div>
+    <div class="illus-thumb" onclick="illusOpen('bal_painting.jpg')">
+      <img src="bal_painting.jpg" alt="Великий бал — живопись">
+    </div>
+    <div class="illus-thumb illus-thumb--soon">
+      <span class="illus-soon-plus">+</span>
+      <span class="illus-soon-label">Скоро</span>
+    </div>
+  </div>
+</div>
 
-    function renderLocations(){
-      const layer=document.getElementById('markers-layer');
-      if(!layer||layer.dataset.ready==='1')return;
-      layer.dataset.ready='1';
-      markerData.forEach(m=>{
-        const b=document.createElement('button');
-        b.type='button';b.className='map-marker';
-        b.style.left=m.x+'%';b.style.top=m.y+'%';
-        b.innerHTML='<span class="map-marker-label">'+m.id+'</span>';
-        b.addEventListener('click',()=>showLocation(m.id));
-        layer.appendChild(b);
-      });
+</div>
+
+
+<!-- Лайтбокс -->
+<div class="illus-lightbox" id="illus-lightbox">
+<button class="illus-lb-close" id="illus-lb-close">✕</button>
+<img class="illus-lb-img" id="illus-lb-img" src="" alt="">
+</div>
+</section>
+<section id="forum" class="tab-content" style="display:none;">
+<div class="forum-wrap">
+<div class="forum-main">
+<div class="forum-header">
+<h2 class="forum-title">Форум</h2>
+<span class="forum-new-btn">+ новая тема</span>
+</div>
+<div class="forum-tabs">
+<span class="forum-tab">Все темы</span>
+<span class="forum-tab">Теории</span>
+<span class="forum-tab">Разбор сцен</span>
+<span class="forum-tab">Экранизации</span>
+<span class="forum-tab">Вопросы</span>
+</div>
+<div class="forum-list">
+<div class="forum-post">
+<h3 class="forum-post-title">Рукописи не горят — это буквально или метафорически?</h3>
+<p class="forum-post-preview">Воланд говорит это Мастеру в конце. Но Булгаков сам сжёг рукопись — и восстановил по памяти. Это же не случайность...</p>
+<div class="forum-post-meta">
+<span class="forum-post-author">olaga_voronova</span>
+<span class="forum-post-date">15 мая</span>
+<span class="forum-post-tag">теории</span>
+</div>
+</div>
+<div class="forum-post">
+<h3 class="forum-post-title">Почему Воланд помогает Мастеру и Маргарите?</h3>
+<p class="forum-post-preview">Он же воплощение зла — но в итоге именно он даёт им покой. Парадокс или логика романа?</p>
+<div class="forum-post-meta">
+<span class="forum-post-author">alee_x</span>
+<span class="forum-post-date">2 апреля</span>
+<span class="forum-post-tag">разбор сцен</span>
+</div>
+</div>
+<div class="forum-post">
+<h3 class="forum-post-title">Экранизация Бортко 2005 и фильм 2024 — что лучше передаёт дух романа?</h3>
+<p class="forum-post-preview">Смотрела обе. Бортко дотошнее к тексту, но фильм 2024 года визуально гораздо атмосфернее.</p>
+<div class="forum-post-meta">
+<span class="forum-post-author">kristinaa</span>
+<span class="forum-post-date">28 марта</span>
+<span class="forum-post-tag">экранизации</span>
+</div>
+</div>
+<div class="forum-post">
+<h3 class="forum-post-title">Кто такой Левий Матвей и почему он так важен?</h3>
+<p class="forum-post-preview">Кажется второстепенным, но именно он в финале приходит к Воланду с просьбой. Это не случайно.</p>
+<div class="forum-post-meta">
+<span class="forum-post-author">olaga_voronova</span>
+<span class="forum-post-date">14 марта</span>
+<span class="forum-post-tag">теории</span>
+</div>
+</div>
+<div class="forum-post">
+<h3 class="forum-post-title">Москва в романе — это сатира или приговор?</h3>
+<p class="forum-post-preview">Все московские сцены — это же один большой диагноз советскому обществу. Или Булгаков всё-таки любил этот город?</p>
+<div class="forum-post-meta">
+<span class="forum-post-author">alee_x</span>
+<span class="forum-post-date">5 марта</span>
+<span class="forum-post-tag">вопросы</span>
+</div>
+</div>
+</div>
+</div>
+<div class="forum-sidebar">
+<div class="forum-sidebar-block">
+<h3 class="forum-sidebar-title">Горячие темы</h3>
+<div class="forum-hot-item">
+<p class="forum-hot-name">Коровьев — кто он на самом деле?</p>
+<span class="forum-hot-meta">48 ответов · 5 дней назад</span>
+</div>
+<div class="forum-hot-item">
+<p class="forum-hot-name">Москва 1930-х в романе — реальные прообразы</p>
+<span class="forum-hot-meta">19 ответов · неделю назад</span>
+</div>
+<div class="forum-hot-item">
+<p class="forum-hot-name">"Трусость — главный порок" — согласны?</p>
+<span class="forum-hot-meta">37 ответов · 2 недели назад</span>
+</div>
+</div>
+<div class="forum-sidebar-block">
+<h3 class="forum-sidebar-title">Участники</h3>
+<p class="forum-members">· olaga_voronova</p>
+<p class="forum-members">· kristinaa</p>
+<p class="forum-members">· alee_x</p>
+</div>
+</div>
+</div>
+</section>
+
+
+<footer class="site-footer">
+<div class="footer-top">
+<div class="footer-column"><p>ПРОЕКТ СОЗДАН ЧИТАТЕЛЯМИ<br>ДЛЯ ЧИТАТЕЛЕЙ</p></div>
+<div class="footer-column"><p>СВЯЗАТЬСЯ С НАМИ<br>LITARI@MAIL.RU</p></div>
+<div class="footer-column"><p>НАД ПРОЕКТОМ РАБОТАЛИ <br>[DARR_YAAS]<br>[VICDENN]<br>[ARUISSHA]<br>[IRINMRMR]</p></div>
+</div>
+<h1 class="footer-big-title">ЛИТАРИ</h1>
+</footer>
+
+
+<div id="cookie-overlay" class="cookie-overlay"><div class="cookie-card"><h2>МЫ ИСПОЛЬЗУЕМ КУКИ</h2><p>Для корректной работы PagePath и вашего удобства нам нужно ваше разрешение на использование файлов cookie.</p><button onclick="acceptCookies()" class="cookie-btn">РАЗРЕШИТЬ</button></div></div>
+
+
+<script>
+const markerData=[{id:1,x:8.2,y:81.8},{id:2,x:43.6,y:82.2},{id:3,x:92.3,y:72.3},{id:4,x:84.4,y:39.8},{id:5,x:63.8,y:31.8},{id:6,x:94.3,y:9.3},{id:7,x:42.3,y:12.8},{id:8,x:17.8,y:42.4},{id:9,x:59.2,y:55.6},{id:10,x:6.8,y:18.8}];
+const locations=[{id:1,title:'Подвал Мастера',address:'Мансуровский переулок, 9, Москва',description:'В небольшом подвальном помещении жил и работал Мастер. Здесь был написан роман о Понтии Пилате, а также развивалась история любви Мастера и Маргариты.'},{id:2,title:'Дом Драмлита',address:'Лаврушинский переулок, 17, строение 2, Москва',description:'Маргарита, обернувшись ведьмой, беспощадно громит квартиру критика Латунского. Считается, что прообраз того самого дома находится в Лаврушинском переулке.'},{id:3,title:'Резиденция Воланда',address:'Воздвиженка, 3/5, строение 1, Москва',description:'Здесь разворачивается одна из самых пронзительных сцен: ученик Иешуа передаёт сатане просьбу своего учителя — подарить Мастеру и Маргарите вечный покой.'},{id:4,title:'Дом Грибоедова',address:'Тверской бульвар, 25, Москва',description:'В двухэтажном старинном доме размещается крупное объединение литераторов МАССОЛИТа под руководством Берлиоза, с роскошным рестораном на открытой веранде.'},{id:5,title:'Нехорошая квартира',address:'Большая Садовая, дом 10, квартира №50, Москва',description:'Квартира становится пристанищем Воланда и его свиты. Здесь происходят загадочные исчезновения, странные происшествия и мистические события.'},{id:6,title:'Театр Варьете',address:'Триумфальная площадь, 2, Москва',description:'В театре Воланд устраивает знаменитый сеанс чёрной магии. Представление превращается в одно из самых необычных событий романа.'},{id:7,title:'Дом Маргариты',address:'улица Спиридоновка, 17, Москва',description:'Здесь жила Маргарита до встречи с Мастером. На сегодняшний день исследователи творчества Булгакова насчитывают не меньше шести зданий, схожих с готическим особняком.'},{id:8,title:'Торгсин (Смоленский рынок)',address:'Арбат, 54/2, строение 1, Москва',description:'Здесь Коровьев и Бегемот устраивают одну из самых известных комических сцен романа, превращая магазин в настоящий хаос.'},{id:9,title:'Патриаршие пруды',address:'Патриаршие пруды, Москва',description:'Место, где впервые появляется Воланд. Здесь Иван Бездомный и Михаил Берлиоз заговаривают с таинственным незнакомцем.'},{id:10,title:'Воробьёвы горы',address:'Воробьёвы горы, Москва',description:'В финале романа Мастер и Маргарита прощаются здесь с Москвой перед тем, как отправиться на вечный покой.'}];
+
+
+function renderLocations(){
+  const layer=document.getElementById('markers-layer');
+  if(!layer||layer.dataset.ready==='1')return;
+  layer.dataset.ready='1';
+  markerData.forEach(m=>{
+    const b=document.createElement('button');
+    b.type='button';b.className='map-marker';
+    b.style.left=m.x+'%';b.style.top=m.y+'%';
+    b.innerHTML='<span class="map-marker-label">'+m.id+'</span>';
+    b.addEventListener('click',()=>showLocation(m.id));
+    layer.appendChild(b);
+  });
+}
+
+function showLocation(id){
+  const loc=locations.find(x=>x.id===id);
+  let panel=document.getElementById('location-info');
+  if(!panel){
+    panel=document.createElement('div');
+    panel.id='location-info';
+    panel.style.cssText='max-width:1200px;margin:20px auto 0;padding:20px 24px;border:1px solid rgba(0,0,0,.08);border-radius:18px;background:rgba(255,255,255,.35)';
+    document.querySelector('#map .map-section').appendChild(panel);
+  }
+  panel.innerHTML='<h3 style="font-family:Playfair Display,serif;font-size:2rem;margin-bottom:10px">'+loc.title+'</h3><div style="font:0.88rem Montserrat,sans-serif;opacity:.72;margin-bottom:12px">'+loc.address+'</div><p style="font:1rem Lora,serif;line-height:1.75">'+loc.description+'</p>';
+}
+
+function graphLegendHTML(){
+  return '<div class="graph-legend"><h4>Легенда связей</h4>'
+    +'<div class="legend-item"><span class="legend-dot" style="background:#b91c1c"></span><span>Любовь</span></div>'
+    +'<div class="legend-item"><span class="legend-dot" style="background:#6d28d9"></span><span>Потусторонняя связь (свита Воланда)</span></div>'
+    +'<div class="legend-item"><span class="legend-dot" style="background:#16a34a"></span><span>Служебные / подчинение</span></div>'
+    +'<div class="legend-item"><span class="legend-dot" style="background:#0ea5e9"></span><span>Литературная среда (МАССОЛИТ)</span></div>'
+    +'<div class="legend-item"><span class="legend-dot" style="background:#facc15"></span><span>Дружба / союз</span></div>'
+    +'<div class="legend-item"><span class="legend-dot" style="background:#9ca3af"></span><span>Конфликт / напряжение</span></div>'
+    +'<div class="legend-item"><span class="legend-dot" style="background:#f97316"></span><span>Предательство / корысть</span></div>'
+    +'</div>';
+}
+
+const EDGES=[
+  {s:'master',t:'margarita',c:'#b91c1c',dash:false},
+  {s:'voland',t:'begemot',c:'#6d28d9',dash:false},
+  {s:'voland',t:'koroviev',c:'#6d28d9',dash:false},
+  {s:'voland',t:'azazello',c:'#6d28d9',dash:false},
+  {s:'voland',t:'gella',c:'#6d28d9',dash:false},
+  {s:'voland',t:'abadonna',c:'#6d28d9',dash:false},
+  {s:'voland',t:'margarita',c:'#6d28d9',dash:false},
+  {s:'begemot',t:'margarita',c:'#6d28d9',dash:false},
+  {s:'koroviev',t:'margarita',c:'#6d28d9',dash:false},
+  {s:'azazello',t:'margarita',c:'#6d28d9',dash:false},
+  {s:'gella',t:'margarita',c:'#6d28d9',dash:false},
+  {s:'abadonna',t:'margarita',c:'#6d28d9',dash:false},
+  {s:'varenuha',t:'koroviev',c:'#6d28d9',dash:false},
+  {s:'varenuha',t:'begemot',c:'#6d28d9',dash:false},
+  {s:'varenuha',t:'azazello',c:'#6d28d9',dash:false},
+  {s:'varenuha',t:'gella',c:'#6d28d9',dash:false},
+  {s:'master',t:'azazello',c:'#16a34a',dash:false},
+  {s:'master',t:'koroviev',c:'#16a34a',dash:false},
+  {s:'varenuha',t:'rimsky',c:'#16a34a',dash:false},
+  {s:'rimsky',t:'archi',c:'#16a34a',dash:false},
+  {s:'berlioz',t:'bezdomny',c:'#0ea5e9',dash:false},
+  {s:'berlioz',t:'stefan',c:'#0ea5e9',dash:false},
+  {s:'stefan',t:'archi',c:'#0ea5e9',dash:false},
+  {s:'master',t:'bezdomny',c:'#facc15',dash:false},
+  {s:'pilat',t:'yeshua',c:'#9ca3af',dash:true},
+  {s:'pilat',t:'levi',c:'#9ca3af',dash:true},
+  {s:'pilat',t:'juda',c:'#9ca3af',dash:true},
+  {s:'levi',t:'juda',c:'#9ca3af',dash:true},
+  {s:'stefan',t:'master',c:'#9ca3af',dash:true},
+  {s:'stefan',t:'margarita',c:'#9ca3af',dash:true},
+  {s:'varenuha',t:'bezdomny',c:'#9ca3af',dash:true},
+  {s:'berlioz',t:'bezdomny',c:'#9ca3af',dash:true},
+  {s:'mogarych',t:'master',c:'#f97316',dash:false},
+  {s:'juda',t:'yeshua',c:'#f97316',dash:false},
+  {s:'master',t:'pilat',c:'#9ca3af',dash:true},
+];
+
+function initGraph(){
+  const el=document.getElementById('cy');
+  const info=document.getElementById('graph-info-panel');
+  if(!el||el._cyInit||typeof cytoscape==='undefined')return;
+  el._cyInit=true;
+
+  const colorMap={
+    'Москва':'#a06c30',
+    'Потусторонний мир':'#6d28d9',
+    'Ершалаим':'#0f766e'
+  };
+
+  const nodes=[
+    {data:{id:'master',label:'Мастер',world:'Москва',desc:'Главный герой, автор романа о Понтии Пилате и возлюбленный Маргариты.'}},
+    {data:{id:'margarita',label:'Маргарита',world:'Москва',desc:'Возлюбленная и муза Мастера, готовая пройти через испытания ради любви.'}},
+    {data:{id:'mogarych',label:'Алоизий\nМогарыч',world:'Москва',desc:'Знакомый Мастера, предавший его ради квартиры — написал донос и завладел жильём.'}},
+    {data:{id:'berlioz',label:'Берлиоз',world:'Москва',desc:'Председатель МАССОЛИТа и редактор журнала, убеждённый атеист. Погибает под трамваем по предсказанию Воланда.'}},
+    {data:{id:'bezdomny',label:'Бездомный',world:'Москва',desc:'Молодой поэт, член МАССОЛИТа. После встречи с Воландом попадает в психиатрическую клинику.'}},
+    {data:{id:'varenuha',label:'Варенуха',world:'Москва',desc:'Администратор театра Варьете, склонный ко лжи и хамству по телефону.'}},
+    {data:{id:'rimsky',label:'Римский',world:'Москва',desc:'Финансовый директор театра Варьете.'}},
+    {data:{id:'archi',label:'Арчибальд',world:'Москва',desc:'Директор ресторана в Доме Грибоедова (здании МАССОЛИТа).'}},
+    {data:{id:'stefan',label:'Степан\nЛиходеев',world:'Москва',desc:'Директор театра Варьете, выселенный Воландом в Ялту.'}},
+    {data:{id:'voland',label:'Воланд',world:'Потусторонний мир',desc:'Могущественный повелитель тёмных сил. «Я — часть той силы, что вечно хочет зла и вечно совершает благо».'}},
+    {data:{id:'begemot',label:'Бегемот',world:'Потусторонний мир',desc:'Кот‑оборотень из свиты Воланда, славится остроумием и проделками.'}},
+    {data:{id:'koroviev',label:'Коровьев',world:'Потусторонний мир',desc:'Фагот — член свиты Воланда, высокий худой мужчина в клетчатом костюме.'}},
+    {data:{id:'azazello',label:'Азазелло',world:'Потусторонний мир',desc:'Демон‑убийца из свиты Воланда, исполнитель приговоров.'}},
+    {data:{id:'gella',label:'Гелла',world:'Потусторонний мир',desc:'Ведьма‑вампир из свиты Воланда.'}},
+    {data:{id:'abadonna',label:'Абадонна',world:'Потусторонний мир',desc:'Демон войны из свиты Воланда.'}},
+    {data:{id:'pilat',label:'Понтий\nПилат',world:'Ершалаим',desc:'Прокуратор Иудеи, вынужденный осудить Иешуа вопреки своей воле.'}},
+    {data:{id:'yeshua',label:'Иешуа',world:'Ершалаим',desc:'Бродячий философ из Ершалаима, прообраз Иисуса Христа.'}},
+    {data:{id:'levi',label:'Левий\nМатвей',world:'Ершалаим',desc:'Ученик и последователь Иешуа Га‑Ноцри.'}},
+    {data:{id:'juda',label:'Иуда',world:'Ершалаим',desc:'Житель Ершалаима, предавший Иешуа за тридцать тетрадрахм.'}}
+  ];
+
+  nodes.forEach(n=>{
+    const w=n.data.world;
+    n.data.color=colorMap[w]||'#888';
+  });
+
+  const edges=EDGES.map((e,i)=>({
+    data:{
+      id:'e'+i,
+      source:e.s,
+      target:e.t,
+      color:e.c,
+      dash:e.dash?'dashed':'solid'
     }
+  }));
 
-    function showLocation(id){
-      const loc=locations.find(x=>x.id===id);
-      let panel=document.getElementById('location-info');
-      if(!panel){
-        panel=document.createElement('div');
-        panel.id='location-info';
-        panel.style.cssText='max-width:1200px;margin:20px auto 0;padding:20px 24px;border:1px solid rgba(0,0,0,.08);border-radius:18px;background:rgba(255,255,255,.35)';
-        document.querySelector('#map .map-section').appendChild(panel);
-      }
-      panel.innerHTML='<h3 style="font-family:Playfair Display,serif;font-size:2rem;margin-bottom:10px">'+loc.title+'</h3><div style="font:0.88rem Montserrat,sans-serif;opacity:.72;margin-bottom:12px">'+loc.address+'</div><p style="font:1rem Lora,serif;line-height:1.75">'+loc.description+'</p>';
+  const cy=cytoscape({
+    container:el,
+    elements:{nodes,edges},
+    style:[
+      {selector:'node',style:{
+        'label':'data(label)',
+        'text-valign':'center',
+        'text-halign':'center',
+        'background-color':'data(color)',
+        'color':'#fff',
+        'font-size':'10px',
+        'font-family':'Montserrat,sans-serif',
+        'font-weight':'700',
+        'text-wrap':'wrap',
+        'text-max-width':'60px',
+        'width':62,
+        'height':62,
+        'border-width':2,
+        'border-color':'rgba(255,255,255,0.6)',
+        'text-outline-color':'data(color)',
+        'text-outline-width':2
+      }},
+      {selector:'node:selected',style:{
+        'border-width':4,
+        'border-color':'#1a1a1a'
+      }},
+      {selector:'edge',style:{
+        'width':2.2,
+        'line-color':'data(color)',
+        'target-arrow-color':'data(color)',
+        'target-arrow-shape':'triangle',
+        'curve-style':'bezier',
+        'line-style':'data(dash)'
+      }},
+      {selector:'.faded',style:{'opacity':0.1}}
+    ],
+    layout:{
+      name:'cose',
+      animate:false,
+      fit:true,
+      padding:40,
+      nodeRepulsion:8000,
+      idealEdgeLength:120,
+      gravity:0.8,
+      numIter:1000
     }
+  });
 
-    function graphLegendHTML(){
-      return '<div class="graph-legend"><h4>Легенда связей</h4>'
-        +'<div class="legend-item"><span class="legend-dot" style="background:#b91c1c"></span><span>Любовь</span></div>'
-        +'<div class="legend-item"><span class="legend-dot" style="background:#6d28d9"></span><span>Потусторонняя связь (свита Воланда)</span></div>'
-        +'<div class="legend-item"><span class="legend-dot" style="background:#16a34a"></span><span>Служебные / подчинение</span></div>'
-        +'<div class="legend-item"><span class="legend-dot" style="background:#0ea5e9"></span><span>Литературная среда (МАССОЛИТ)</span></div>'
-        +'<div class="legend-item"><span class="legend-dot" style="background:#facc15"></span><span>Дружба / союз</span></div>'
-        +'<div class="legend-item"><span class="legend-dot" style="background:#9ca3af"></span><span>Конфликт / напряжение</span></div>'
-        +'<div class="legend-item"><span class="legend-dot" style="background:#f97316"></span><span>Предательство / корысть</span></div>'
-        +'</div>';
+  cy.on('tap','node',function(e){
+    const d=e.target.data();
+    cy.elements().addClass('faded');
+    e.target.removeClass('faded');
+    e.target.connectedEdges().removeClass('faded').connectedNodes().removeClass('faded');
+    info.innerHTML='<h3 style="font-family:Playfair Display,serif;font-size:1.8rem;margin-bottom:12px">'+d.label.replace('\n',' ')+'</h3>'
+      +'<p style="font-family:Lora,serif;font-size:0.9rem;opacity:.7;margin-bottom:10px">Мир: '+d.world+'</p>'
+      +'<p style="font-family:Lora,serif;line-height:1.75">'+d.desc+'</p>'
+      +graphLegendHTML();
+  });
+
+  cy.on('tap',function(e){
+    if(e.target===cy){
+      cy.elements().removeClass('faded');
+      info.innerHTML='<h3>Выберите персонажа</h3><p>Нажмите на узел графа, чтобы увидеть описание героя, его мир и легенду связей.</p>'+graphLegendHTML();
     }
+  });
+}
 
-    const EDGES=[
-      {s:'master',t:'margarita',c:'#b91c1c',dash:false},
-      {s:'voland',t:'begemot',c:'#6d28d9',dash:false},
-      {s:'voland',t:'koroviev',c:'#6d28d9',dash:false},
-      {s:'voland',t:'azazello',c:'#6d28d9',dash:false},
-      {s:'voland',t:'gella',c:'#6d28d9',dash:false},
-      {s:'voland',t:'abadonna',c:'#6d28d9',dash:false},
-      {s:'voland',t:'margarita',c:'#6d28d9',dash:false},
-      {s:'begemot',t:'margarita',c:'#6d28d9',dash:false},
-      {s:'koroviev',t:'margarita',c:'#6d28d9',dash:false},
-      {s:'azazello',t:'margarita',c:'#6d28d9',dash:false},
-      {s:'gella',t:'margarita',c:'#6d28d9',dash:false},
-      {s:'abadonna',t:'margarita',c:'#6d28d9',dash:false},
-      {s:'varenuha',t:'koroviev',c:'#6d28d9',dash:false},
-      {s:'varenuha',t:'begemot',c:'#6d28d9',dash:false},
-      {s:'varenuha',t:'azazello',c:'#6d28d9',dash:false},
-      {s:'varenuha',t:'gella',c:'#6d28d9',dash:false},
-      {s:'master',t:'azazello',c:'#16a34a',dash:false},
-      {s:'master',t:'koroviev',c:'#16a34a',dash:false},
-      {s:'varenuha',t:'rimsky',c:'#16a34a',dash:false},
-      {s:'rimsky',t:'archi',c:'#16a34a',dash:false},
-      {s:'berlioz',t:'bezdomny',c:'#0ea5e9',dash:false},
-      {s:'berlioz',t:'stefan',c:'#0ea5e9',dash:false},
-      {s:'stefan',t:'archi',c:'#0ea5e9',dash:false},
-      {s:'master',t:'bezdomny',c:'#facc15',dash:false},
-      {s:'pilat',t:'yeshua',c:'#9ca3af',dash:true},
-      {s:'pilat',t:'levi',c:'#9ca3af',dash:true},
-      {s:'pilat',t:'juda',c:'#9ca3af',dash:true},
-      {s:'levi',t:'juda',c:'#9ca3af',dash:true},
-      {s:'stefan',t:'master',c:'#9ca3af',dash:true},
-      {s:'stefan',t:'margarita',c:'#9ca3af',dash:true},
-      {s:'varenuha',t:'bezdomny',c:'#9ca3af',dash:true},
-      {s:'berlioz',t:'bezdomny',c:'#9ca3af',dash:true},
-      {s:'mogarych',t:'master',c:'#f97316',dash:false},
-      {s:'juda',t:'yeshua',c:'#f97316',dash:false},
-      {s:'master',t:'pilat',c:'#9ca3af',dash:true},
-    ];
-
-    function initGraph(){
-      const el=document.getElementById('cy');
-      const info=document.getElementById('graph-info-panel');
-      if(!el||el._cyInit||typeof cytoscape==='undefined')return;
-      el._cyInit=true;
-
-      const colorMap={
-        'Москва':'#a06c30',
-        'Потусторонний мир':'#6d28d9',
-        'Ершалаим':'#0f766e'
-      };
-
-      const nodes=[
-        {data:{id:'master',label:'Мастер',world:'Москва',desc:'Главный герой, автор романа о Понтии Пилате и возлюбленный Маргариты.'}},
-        {data:{id:'margarita',label:'Маргарита',world:'Москва',desc:'Возлюбленная и муза Мастера, готовая пройти через испытания ради любви.'}},
-        {data:{id:'mogarych',label:'Алоизий\nМогарыч',world:'Москва',desc:'Знакомый Мастера, предавший его ради квартиры — написал донос и завладел жильём.'}},
-        {data:{id:'berlioz',label:'Берлиоз',world:'Москва',desc:'Председатель МАССОЛИТа и редактор журнала, убеждённый атеист. Погибает под трамваем по предсказанию Воланда.'}},
-        {data:{id:'bezdomny',label:'Бездомный',world:'Москва',desc:'Молодой поэт, член МАССОЛИТа. После встречи с Воландом попадает в психиатрическую клинику.'}},
-        {data:{id:'varenuha',label:'Варенуха',world:'Москва',desc:'Администратор театра Варьете, склонный ко лжи и хамству по телефону.'}},
-        {data:{id:'rimsky',label:'Римский',world:'Москва',desc:'Финансовый директор театра Варьете.'}},
-        {data:{id:'archi',label:'Арчибальд',world:'Москва',desc:'Директор ресторана в Доме Грибоедова (здании МАССОЛИТа).'}},
-        {data:{id:'stefan',label:'Степан\nЛиходеев',world:'Москва',desc:'Директор театра Варьете, выселенный Воландом в Ялту.'}},
-        {data:{id:'voland',label:'Воланд',world:'Потусторонний мир',desc:'Могущественный повелитель тёмных сил. «Я — часть той силы, что вечно хочет зла и вечно совершает благо».'}},
-        {data:{id:'begemot',label:'Бегемот',world:'Потусторонний мир',desc:'Кот‑оборотень из свиты Воланда, славится остроумием и проделками.'}},
-        {data:{id:'koroviev',label:'Коровьев',world:'Потусторонний мир',desc:'Фагот — член свиты Воланда, высокий худой мужчина в клетчатом костюме.'}},
-        {data:{id:'azazello',label:'Азазелло',world:'Потусторонний мир',desc:'Демон‑убийца из свиты Воланда, исполнитель приговоров.'}},
-        {data:{id:'gella',label:'Гелла',world:'Потусторонний мир',desc:'Ведьма‑вампир из свиты Воланда.'}},
-        {data:{id:'abadonna',label:'Абадонна',world:'Потусторонний мир',desc:'Демон войны из свиты Воланда.'}},
-        {data:{id:'pilat',label:'Понтий\nПилат',world:'Ершалаим',desc:'Прокуратор Иудеи, вынужденный осудить Иешуа вопреки своей воле.'}},
-        {data:{id:'yeshua',label:'Иешуа',world:'Ершалаим',desc:'Бродячий философ из Ершалаима, прообраз Иисуса Христа.'}},
-        {data:{id:'levi',label:'Левий\nМатвей',world:'Ершалаим',desc:'Ученик и последователь Иешуа Га‑Ноцри.'}},
-        {data:{id:'juda',label:'Иуда',world:'Ершалаим',desc:'Житель Ершалаима, предавший Иешуа за тридцать тетрадрахм.'}}
-      ];
-
-      nodes.forEach(n=>{
-        const w=n.data.world;
-        n.data.color=colorMap[w]||'#888';
-      });
-
-      const edges=EDGES.map((e,i)=>({
-        data:{
-          id:'e'+i,
-          source:e.s,
-          target:e.t,
-          color:e.c,
-          dash:e.dash?'dashed':'solid'
-        }
-      }));
-
-      const cy=cytoscape({
-        container:el,
-        elements:{nodes,edges},
-        style:[
-          {selector:'node',style:{
-            'label':'data(label)',
-            'text-valign':'center',
-            'text-halign':'center',
-            'background-color':'data(color)',
-            'color':'#fff',
-            'font-size':'10px',
-            'font-family':'Montserrat,sans-serif',
-            'font-weight':'700',
-            'text-wrap':'wrap',
-            'text-max-width':'60px',
-            'width':62,
-            'height':62,
-            'border-width':2,
-            'border-color':'rgba(255,255,255,0.6)',
-            'text-outline-color':'data(color)',
-            'text-outline-width':2
-          }},
-          {selector:'node:selected',style:{
-            'border-width':4,
-            'border-color':'#1a1a1a'
-          }},
-          {selector:'edge',style:{
-            'width':2.2,
-            'line-color':'data(color)',
-            'target-arrow-color':'data(color)',
-            'target-arrow-shape':'triangle',
-            'curve-style':'bezier',
-            'line-style':'data(dash)'
-          }},
-          {selector:'.faded',style:{'opacity':0.1}}
-        ],
-        layout:{
-          name:'cose',
-          animate:false,
-          fit:true,
-          padding:40,
-          nodeRepulsion:8000,
-          idealEdgeLength:120,
-          gravity:0.8,
-          numIter:1000
-        }
-      });
-
-      cy.on('tap','node',function(e){
-        const d=e.target.data();
-        cy.elements().addClass('faded');
-        e.target.removeClass('faded');
-        e.target.connectedEdges().removeClass('faded').connectedNodes().removeClass('faded');
-        info.innerHTML='<h3 style="font-family:Playfair Display,serif;font-size:1.8rem;margin-bottom:12px">'+d.label.replace('\n',' ')+'</h3>'
-          +'<p style="font-family:Lora,serif;font-size:0.9rem;opacity:.7;margin-bottom:10px">Мир: '+d.world+'</p>'
-          +'<p style="font-family:Lora,serif;line-height:1.75">'+d.desc+'</p>'
-          +graphLegendHTML();
-      });
-
-      cy.on('tap',function(e){
-        if(e.target===cy){
-          cy.elements().removeClass('faded');
-          info.innerHTML='<h3>Выберите персонажа</h3><p>Нажмите на узел графа, чтобы увидеть описание героя, его мир и легенду связей.</p>'+graphLegendHTML();
-        }
-      });
+// Nav & tabs
+const tabs=document.querySelectorAll('.tab-content');
+const links=document.querySelectorAll('.nav-links a');
+function showTab(id){
+  tabs.forEach(t=>t.style.display='none');
+  const target=document.getElementById(id);
+  if(target){
+    target.style.display='';
+    if(id==='characters')setTimeout(initGraph,100);
+    if(id==='map')renderLocations();
+  }
+}
+links.forEach(a=>{
+  a.addEventListener('click',function(e){
+    const href=this.getAttribute('href');
+    if(href&&href.startsWith('#')){
+      e.preventDefault();
+      const id=href.slice(1);
+      showTab(id);
+      links.forEach(l=>l.style.fontWeight='');
+      this.style.fontWeight='700';
     }
+  });
+});
 
-    // Nav & tabs
-    const tabs=document.querySelectorAll('.tab-content');
-    const links=document.querySelectorAll('.nav-links a');
-    function showTab(id){
-      tabs.forEach(t=>t.style.display='none');
-      const target=document.getElementById(id);
-      if(target){
-        target.style.display='';
-        if(id==='characters')setTimeout(initGraph,100);
-        if(id==='map')renderLocations();
-      }
-    }
-    links.forEach(a=>{
-      a.addEventListener('click',function(e){
-        const href=this.getAttribute('href');
-        if(href&&href.startsWith('#')){
-          e.preventDefault();
-          const id=href.slice(1);
-          showTab(id);
-          links.forEach(l=>l.style.fontWeight='');
-          this.style.fontWeight='700';
-        }
-      });
-    });
+// Cookie
+function acceptCookies(){
+  localStorage.setItem('cookiesAccepted','1');
+  document.getElementById('cookie-overlay').style.display='none';
+}
+window.addEventListener('load',()=>{
+  if(!localStorage.getItem('cookiesAccepted')){
+    const o=document.getElementById('cookie-overlay');
+    o.style.display='flex';
+  }
+});
+// ===== ИЛЛЮСТРАЦИИ =====
 
-    // Cookie
-    function acceptCookies(){
-      localStorage.setItem('cookiesAccepted','1');
-      document.getElementById('cookie-overlay').style.display='none';
-    }
-    window.addEventListener('load',()=>{
-      if(!localStorage.getItem('cookiesAccepted')){
-        const o=document.getElementById('cookie-overlay');
-        o.style.display='flex';
-      }
-    });
-  </script>
+(function(){
+var bar = document.getElementById('illus-chapters-bar');
+if(!bar) return;
+
+
+var blockAll  = document.getElementById('illus-block-all');
+var block23   = document.getElementById('illus-block-23');
+var blockSoon = document.getElementById('illus-block-soon');
+var soonText  = document.getElementById('illus-soon-text');
+
+
+function showIllusBlock(ch){
+blockAll.style.display  = 'none';
+block23.style.display   = 'none';
+blockSoon.style.display = 'none';
+
+
+if(ch === 'all'){
+  blockAll.style.display = '';
+} else if(ch === '23'){
+  block23.style.display = '';
+} else {
+  soonText.textContent = 'Иллюстрации к главе ' + ch + ' скоро появятся';
+  blockSoon.style.display = '';
+}
+
+}
+
+
+bar.addEventListener('click', function(e){
+var tab = e.target.closest('.illus-ch-tab');
+if(!tab) return;
+document.querySelectorAll('.illus-ch-tab').forEach(function(t){ t.classList.remove('active'); });
+tab.classList.add('active');
+showIllusBlock(tab.dataset.ch);
+});
+
+
+// Начальное состояние — все главы
+//showIllusBlock('all');
+})();
+
+
+// ===== ЛАЙТБОКС =====
+function illusOpen(src){
+var lb  = document.getElementById('illus-lightbox');
+var img = document.getElementById('illus-lb-img');
+img.src = src;
+lb.classList.add('open');
+document.body.style.overflow = 'hidden';
+}
+
+
+function illusClose(){
+document.getElementById('illus-lightbox').classList.remove('open');
+document.getElementById('illus-lb-img').src = '';
+document.body.style.overflow = '';
+}
+
+
+document.addEventListener('DOMContentLoaded', function(){
+var lb  = document.getElementById('illus-lightbox');
+var btn = document.getElementById('illus-lb-close');
+if(btn) btn.addEventListener('click', function(e){ e.stopPropagation(); illusClose(); });
+if(lb)  lb.addEventListener('click',  function(e){ if(e.target === lb) illusClose(); });
+});
+
+
+document.addEventListener('keydown', function(e){
+if(e.key === 'Escape') illusClose();
+});
+</script>
 </body>
 </html>
