@@ -59,7 +59,7 @@ pagepath/
 |-|----------|------|
 | 1 | [@arinakorikova30](https://github.com/arinakorikova30) | UX-дизайнер |
 | 2 | [@vicdenn3](https://github.com/vicdenn3) | Frontend-разработчик |
-| 3 | [@Rinamoroz](https://github.com/Rinamoroz) | Аналитик повествования и иллюстратор |
+| 3 | [@Rinamoroz](https://github.com/Rinamoroz) | Контент-мейкер |
 | 4 | [@dashaavas](https://github.com/dashaavas) | UI-дизайнер |
 
 ## Лицензия
