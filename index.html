@@ -37,7 +37,7 @@
 .illus-ch-tab{font-family:'Lora',serif;font-size:.85rem;padding:16px 24px 14px;cursor:pointer;opacity:.55;line-height:1.4;border-bottom:2px solid transparent;transition:.2s;white-space:nowrap;flex-shrink:0}
 .illus-ch-tab:hover{opacity:.9}
 .illus-ch-tab.active{opacity:1;border-bottom:2px solid #1a1a1a;font-weight:700}
-.illus-featured{display:grid;grid-template-columns:400px 1fr;gap:0;border:1px solid rgba(0,0,0,.1);border-radius:4px;overflow:hidden;margin-bottom:16px;cursor:pointer;background:#fff;transition:.2s}
+.illus-featured{display:grid;grid-template-columns:400px 1fr;gap:0;border:1px solid rgba(0,0,0,.1);border-radius:4px;overflow:hidden;margin-bottom:16px;cursor:pointer;background:#fffad7;transition:.2s}
 .illus-featured:hover{box-shadow:0 4px 20px rgba(0,0,0,.1)}
 .illus-featured:hover .illus-featured-img img{transform:scale(1.03)}
 .illus-featured-img{overflow:hidden;height:300px}
@@ -520,8 +520,13 @@ function showTab(id){
   const target=document.getElementById(id);
   if(target){
     target.style.display='';
-    if(id==='characters')setTimeout(initGraph,100);
-    if(id==='map')renderLocations();
+    if(id==='characters') setTimeout(initGraph,100);
+    if(id==='map') renderLocations();
+
+    // Плавный скролл к навбару
+    const nav = document.querySelector('.bottom-nav');
+    const navTop = nav.getBoundingClientRect().top + window.scrollY;
+    window.scrollTo({ top: navTop, behavior: 'smooth' });
   }
 }
 links.forEach(a=>{
